@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Note.gd" type="Script" id=1]
+[ext_resource path="res://entity/note/Note.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
 [node name="Note" type="PathFollow2D"]

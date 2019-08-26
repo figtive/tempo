@@ -1,6 +1,5 @@
 extends Path2D
 
-export(NodePath) var note_path
 onready var note_scene = preload("res://entity/note/Note.tscn")
 
 func _ready():

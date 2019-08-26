@@ -1,13 +1,46 @@
 extends Node
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export(String, FILE, "*.tempo") var tempo_data
 
-# Called when the node enters the scene tree for the first time.
+var title: String
+var origin: String
+var bpm: int
+var signature: int
+var notes: Dictionary
+
 func _ready():
-	pass # Replace with function body.
+	var DEBUG_STARTTIME = OS.get_ticks_msec()
+	var file = File.new()
+	file.open(tempo_data, File.READ)
+	parse(file.get_as_text())
+	print("[LevelController] %s loaded successfully in %sms!" % [tempo_data, OS.get_ticks_msec() - DEBUG_STARTTIME])
+	print("[LevelController] %s from %s @ %sbpm in %s sig" % [title, origin, bpm, signature])
+	print("[LevelController] Notes: %s" % notes)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func parse(data: String):
+	var lines = data.split("\n", false)
+	title = lines[0]
+	origin = lines[1]
+	bpm = lines[2] as int
+	signature = lines[3].split(" ")[0] as int
+	for i in range(4, lines.size()):
+		var tokens = lines[i].split(" ", false)
+		print(tokens)
+		var beat = [GameManager.Action.NONE, GameManager.Action.NONE, GameManager.Action.NONE, GameManager.Action.NONE]
+		for i in range(0, 5):
+			print(tokens[i])
+			if i != 0:	
+				match tokens[i].to_upper():
+					"T":
+						beat[i-1] = GameManager.Action.TAP
+					"U":
+						beat[i-1] = GameManager.Action.SWIPE_UP
+					"D":
+						beat[i-1] = GameManager.Action.SWIPE_DOWN
+					"L":
+						beat[i-1] = GameManager.Action.SWIPE_LEFT
+					"R":
+						beat[i-1] = GameManager.Action.SWIPE_RIGHT
+			else:
+				print(beat)
+				notes[tokens[i]] = beat
