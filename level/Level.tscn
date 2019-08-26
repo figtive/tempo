@@ -1,0 +1,113 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://controller/LevelController.gd" type="Script" id=1]
+[ext_resource path="res://entity/lane/Lane.gd" type="Script" id=2]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 312, 352, 0, 0, 0, 0, 24, 1280 )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 344, 352, 0, 0, 0, 0, 248, 1280 )
+}
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 376, 352, 0, 0, 0, 0, 472, 1280 )
+}
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 408, 352, 0, 0, 0, 0, 696, 1280 )
+}
+
+[node name="Level" type="Node"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 352.0, 1072.0, 576.0 ],
+"_edit_vertical_guides_": [ 360.0 ]
+}
+
+[node name="DEBUG_align" type="Polygon2D" parent="."]
+position = Vector2( 64, 16 )
+polygon = PoolVector2Array( 408, 1280, 184, 1280, 184, 1296, 408, 1296 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="DEBUG_hitline" type="Polygon2D" parent="."]
+position = Vector2( -591.429, -216 )
+scale = Vector2( 3.21429, 1 )
+polygon = PoolVector2Array( 408, 1280, 184, 1280, 184, 1296, 408, 1296 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Background" type="Polygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( 0, 0, 0, 1280, 720, 1280, 720, 0 )
+
+[node name="Lane1" type="Path2D" parent="."]
+curve = SubResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Line2D" type="Line2D" parent="Lane1"]
+points = PoolVector2Array( 312, 352, 24, 1280 )
+width = 4.0
+texture_mode = 1074266112
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Lane2" type="Path2D" parent="."]
+curve = SubResource( 2 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Line2D" type="Line2D" parent="Lane2"]
+scale = Vector2( 0.784823, 2.30485 )
+points = PoolVector2Array( 438.316, 152.721, 315.995, 555.35 )
+width = 4.0
+texture_mode = 1074266112
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Lane3" type="Path2D" parent="."]
+curve = SubResource( 3 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Line2D" type="Line2D" parent="Lane3"]
+points = PoolVector2Array( 376, 352, 472, 1280 )
+width = 4.0
+texture_mode = 1074266112
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Lane4" type="Path2D" parent="."]
+curve = SubResource( 4 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Line2D" type="Line2D" parent="Lane4"]
+points = PoolVector2Array( 408, 352, 696, 1280 )
+width = 4.0
+texture_mode = 1074266112
+__meta__ = {
+"_edit_lock_": true
+}

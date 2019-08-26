@@ -16,7 +16,23 @@ _global_script_class_icons={
 [application]
 
 config/name="Tempo"
+run/main_scene="res://level/Level.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GameManager="*res://controller/GameManager.gd"
+
+[display]
+
+window/size/width=720
+window/size/height=1280
+window/size/resizable=false
+window/size/test_width=540
+window/size/test_height=960
+window/handheld/orientation="portrait"
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [rendering]
 
