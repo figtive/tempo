@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://controller/LevelController.gd" type="Script" id=1]
 [ext_resource path="res://entity/lane/Lane.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -26,7 +27,7 @@ _data = {
 [node name="Level1" type="Node"]
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_horizontal_guides_": [ 352.0, 1072.0, 576.0 ],
+"_edit_horizontal_guides_": [ 352.0, 1048.35, 576.0 ],
 "_edit_vertical_guides_": [ 360.0 ]
 }
 tempo_data = "res://level/Level1.tempo"
@@ -40,13 +41,19 @@ __meta__ = {
 }
 
 [node name="DEBUG_hitline" type="Polygon2D" parent="."]
+editor/display_folded = true
 position = Vector2( -591.429, -216 )
 scale = Vector2( 3.21429, 1 )
-polygon = PoolVector2Array( 408, 1280, 184, 1280, 184, 1296, 408, 1296 )
+polygon = PoolVector2Array( 408, 1224, 184, 1224, 184, 1304, 408, 1304 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
+
+[node name="Tween" type="Tween" parent="DEBUG_hitline"]
+repeat = true
+playback_process_mode = 0
+playback/repeat = true
 
 [node name="Background" type="Polygon2D" parent="."]
 visible = false
@@ -67,8 +74,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Hitter" type="PathFollow2D" parent="Lane1"]
+position = Vector2( 96.14, 1047.55 )
+offset = 731.377
+rotate = false
+
+[node name="Sprite" type="Sprite" parent="Lane1/Hitter"]
+modulate = Color( 1, 1, 1, 0.498039 )
+texture = ExtResource( 3 )
+
 [node name="Lane2" type="Path2D" parent="."]
-editor/display_folded = true
 curve = SubResource( 2 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -84,8 +99,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Hitter" type="PathFollow2D" parent="Lane2"]
+position = Vector2( 271.964, 1048.35 )
+offset = 699.951
+rotate = false
+
+[node name="Sprite" type="Sprite" parent="Lane2/Hitter"]
+modulate = Color( 1, 1, 1, 0.498039 )
+texture = ExtResource( 3 )
+
 [node name="Lane3" type="Path2D" parent="."]
-editor/display_folded = true
 curve = SubResource( 3 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -100,8 +123,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Hitter" type="PathFollow2D" parent="Lane3"]
+position = Vector2( 448.036, 1048.35 )
+offset = 699.951
+rotate = false
+
+[node name="Sprite" type="Sprite" parent="Lane3/Hitter"]
+modulate = Color( 1, 1, 1, 0.498039 )
+texture = ExtResource( 3 )
+
 [node name="Lane4" type="Path2D" parent="."]
-editor/display_folded = true
 curve = SubResource( 4 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -115,6 +146,15 @@ texture_mode = 1074266112
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Hitter" type="PathFollow2D" parent="Lane4"]
+position = Vector2( 623.86, 1047.55 )
+offset = 731.377
+rotate = false
+
+[node name="Sprite" type="Sprite" parent="Lane4/Hitter"]
+modulate = Color( 1, 1, 1, 0.498039 )
+texture = ExtResource( 3 )
 
 [node name="Metronome" type="Timer" parent="."]
 process_mode = 0

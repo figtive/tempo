@@ -25,6 +25,9 @@ func _ready():
 	$Metronome.wait_time = 60.0 / bpm
 	$Metronome.start()
 	
+	$DEBUG_hitline/Tween.interpolate_property($DEBUG_hitline, "color", Color(1,1,1,1), Color(1,1,1,0.25), 60.0/bpm, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	$DEBUG_hitline/Tween.start()
+
 func beat():
 	var interval = notes.get(counter)
 	if interval != null:
