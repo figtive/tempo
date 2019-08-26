@@ -53,7 +53,6 @@ visible = false
 polygon = PoolVector2Array( 0, 0, 0, 1280, 720, 1280, 720, 0 )
 
 [node name="Lane1" type="Path2D" parent="."]
-editor/display_folded = true
 curve = SubResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -116,3 +115,6 @@ texture_mode = 1074266112
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Metronome" type="Timer" parent="."]
+process_mode = 0
