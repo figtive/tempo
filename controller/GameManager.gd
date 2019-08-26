@@ -8,6 +8,7 @@ var TIME_OFFSET = 0
 
 func _ready():
 	calc_offset()
+	print("TIME_OFFSET %sms" % (TIME_OFFSET * 1000))
 	
 func calc_offset():
 #	TIME_OFFSET = sqrt(HITTER_POS / NOTE_SPEED) * NOTE_SPEED

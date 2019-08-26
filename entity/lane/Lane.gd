@@ -8,3 +8,6 @@ func _ready():
 func spawn(action):
 	if action != GameManager.Action.NONE:
 		add_child(note_scene.instance())
+
+func hit():
+	pass

@@ -47,6 +47,7 @@ func beat():
 	if counter > note_count:
 		print("LevelManager] Level done!")
 		$Metronome.stop()
+		$LaneContainer/DEBUG_hitline/Tween.stop_all()
 
 func parse(data: String):
 	var lines = data.split("\n", false)
