@@ -11,6 +11,10 @@ var note_count = 0
 var counter = 0
 
 func _ready():
+	$HTTPRequest.request("https://gitlab.com/fight-interactive/tempo-public/snippets/1889052/raw")
+	yield($HTTPRequest, "request_completed")
+	print("Downloaded!")
+	
 	var DEBUG_STARTTIME = OS.get_ticks_msec()
 	var file = File.new()
 	file.open(tempo_data, File.READ)
@@ -25,16 +29,17 @@ func _ready():
 	$Metronome.wait_time = 60.0 / bpm
 	$Metronome.start()
 	
-	$DEBUG_hitline/Tween.interpolate_property($DEBUG_hitline, "color", Color(1,1,1,1), Color(1,1,1,0.25), 60.0/bpm, Tween.TRANS_QUAD, Tween.EASE_OUT)
-	$DEBUG_hitline/Tween.start()
+	$LaneContainer/DEBUG_hitline/Tween.interpolate_property($LaneContainer/DEBUG_hitline, "color", Color(1,1,1,1), Color(1,1,1,0.25), 60.0/bpm, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	$LaneContainer/DEBUG_hitline/Tween.start()
 
 func beat():
+	$Metronome/Beep.play()
 	var interval = notes.get(counter)
 	if interval != null:
-		$Lane1.spawn(interval[0])
-		$Lane2.spawn(interval[1])
-		$Lane3.spawn(interval[2])
-		$Lane4.spawn(interval[3])
+		$LaneContainer/Lane1.spawn(interval[0])
+		$LaneContainer/Lane2.spawn(interval[1])
+		$LaneContainer/Lane3.spawn(interval[2])
+		$LaneContainer/Lane4.spawn(interval[3])
 		print("Beat %s :: %s" % [counter, interval])
 	else:
 		print("Beat %s" % counter)

@@ -1,160 +1,175 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://controller/LevelController.gd" type="Script" id=1]
 [ext_resource path="res://entity/lane/Lane.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://sound/beep.wav" type="AudioStream" id=4]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 312, 352, 0, 0, 0, 0, 24, 1280 )
+"points": PoolVector2Array( 0, 0, 0, 0, 312, 352, 0, 0, 0, 0, 48, 1280 )
 }
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 344, 352, 0, 0, 0, 0, 248, 1280 )
+"points": PoolVector2Array( 0, 0, 0, 0, 344, 352, 0, 0, 0, 0, 256, 1280 )
 }
 
 [sub_resource type="Curve2D" id=3]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 376, 352, 0, 0, 0, 0, 472, 1280 )
+"points": PoolVector2Array( 0, 0, 0, 0, 376, 352, 0, 0, 0, 0, 464, 1280 )
 }
 
 [sub_resource type="Curve2D" id=4]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 408, 352, 0, 0, 0, 0, 696, 1280 )
+"points": PoolVector2Array( 0, 0, 0, 0, 408, 352, 0, 0, 0, 0, 672, 1280 )
 }
 
 [node name="Level1" type="Node"]
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_horizontal_guides_": [ 352.0, 1048.35, 576.0 ],
+"_edit_horizontal_guides_": [ 352.0, 1048.0, 576.0 ],
 "_edit_vertical_guides_": [ 360.0 ]
 }
 tempo_data = "res://level/Level1.tempo"
 
 [node name="DEBUG_align" type="Polygon2D" parent="."]
-position = Vector2( 64, 16 )
-polygon = PoolVector2Array( 408, 1280, 184, 1280, 184, 1296, 408, 1296 )
+visible = false
+position = Vector2( -144, 0 )
+polygon = PoolVector2Array( 400, 1280, 192, 1280, 192, 1296, 400, 1296 )
 __meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
+"_edit_group_": true
 }
-
-[node name="DEBUG_hitline" type="Polygon2D" parent="."]
-editor/display_folded = true
-position = Vector2( -591.429, -216 )
-scale = Vector2( 3.21429, 1 )
-polygon = PoolVector2Array( 408, 1224, 184, 1224, 184, 1304, 408, 1304 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
-
-[node name="Tween" type="Tween" parent="DEBUG_hitline"]
-repeat = true
-playback_process_mode = 0
-playback/repeat = true
 
 [node name="Background" type="Polygon2D" parent="."]
 visible = false
 polygon = PoolVector2Array( 0, 0, 0, 1280, 720, 1280, 720, 0 )
 
-[node name="Lane1" type="Path2D" parent="."]
+[node name="LaneContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -360.0
+margin_top = -1280.0
+margin_right = 360.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="DEBUG_hitline" type="Polygon2D" parent="LaneContainer"]
+position = Vector2( -592, -216 )
+scale = Vector2( 3.21429, 1 )
+polygon = PoolVector2Array( 408.177, 1224, 184.178, 1224, 184.178, 1304, 408.177, 1304 )
+
+[node name="Tween" type="Tween" parent="LaneContainer/DEBUG_hitline"]
+repeat = true
+playback_process_mode = 0
+playback/repeat = true
+
+[node name="Lane1" type="Path2D" parent="LaneContainer"]
 curve = SubResource( 1 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="Line2D" type="Line2D" parent="Lane1"]
-points = PoolVector2Array( 312, 352, 24, 1280 )
+[node name="Line2D" type="Line2D" parent="LaneContainer/Lane1"]
+points = PoolVector2Array( 312, 352, 48, 1280 )
 width = 4.0
 texture_mode = 1074266112
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Hitter" type="PathFollow2D" parent="Lane1"]
-position = Vector2( 96.14, 1047.55 )
-offset = 731.377
+[node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane1"]
+position = Vector2( 114.001, 1048 )
+offset = 723.534
 rotate = false
 
-[node name="Sprite" type="Sprite" parent="Lane1/Hitter"]
+[node name="Sprite" type="Sprite" parent="LaneContainer/Lane1/Hitter"]
 modulate = Color( 1, 1, 1, 0.498039 )
 texture = ExtResource( 3 )
 
-[node name="Lane2" type="Path2D" parent="."]
+[node name="Lane2" type="Path2D" parent="LaneContainer"]
 curve = SubResource( 2 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="Line2D" type="Line2D" parent="Lane2"]
+[node name="Line2D" type="Line2D" parent="LaneContainer/Lane2"]
 scale = Vector2( 0.784823, 2.30485 )
-points = PoolVector2Array( 438.316, 152.721, 315.995, 555.35 )
+points = PoolVector2Array( 438.316, 152.721, 326.188, 555.351 )
 width = 4.0
 texture_mode = 1074266112
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Hitter" type="PathFollow2D" parent="Lane2"]
-position = Vector2( 271.964, 1048.35 )
-offset = 699.951
+[node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane2"]
+position = Vector2( 278.041, 1047.57 )
+offset = 699.283
 rotate = false
 
-[node name="Sprite" type="Sprite" parent="Lane2/Hitter"]
+[node name="Sprite" type="Sprite" parent="LaneContainer/Lane2/Hitter"]
 modulate = Color( 1, 1, 1, 0.498039 )
 texture = ExtResource( 3 )
 
-[node name="Lane3" type="Path2D" parent="."]
+[node name="Lane3" type="Path2D" parent="LaneContainer"]
 curve = SubResource( 3 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="Line2D" type="Line2D" parent="Lane3"]
-points = PoolVector2Array( 376, 352, 472, 1280 )
+[node name="Line2D" type="Line2D" parent="LaneContainer/Lane3"]
+points = PoolVector2Array( 376, 352, 464, 1280 )
 width = 4.0
 texture_mode = 1074266112
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Hitter" type="PathFollow2D" parent="Lane3"]
-position = Vector2( 448.036, 1048.35 )
-offset = 699.951
+[node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane3"]
+position = Vector2( 441.959, 1047.57 )
+offset = 699.283
 rotate = false
 
-[node name="Sprite" type="Sprite" parent="Lane3/Hitter"]
+[node name="Sprite" type="Sprite" parent="LaneContainer/Lane3/Hitter"]
 modulate = Color( 1, 1, 1, 0.498039 )
 texture = ExtResource( 3 )
 
-[node name="Lane4" type="Path2D" parent="."]
+[node name="Lane4" type="Path2D" parent="LaneContainer"]
 curve = SubResource( 4 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="Line2D" type="Line2D" parent="Lane4"]
-points = PoolVector2Array( 408, 352, 696, 1280 )
+[node name="Line2D" type="Line2D" parent="LaneContainer/Lane4"]
+points = PoolVector2Array( 408, 352, 672, 1280 )
 width = 4.0
 texture_mode = 1074266112
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Hitter" type="PathFollow2D" parent="Lane4"]
-position = Vector2( 623.86, 1047.55 )
-offset = 731.377
+[node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane4"]
+position = Vector2( 605.999, 1048 )
+offset = 723.534
 rotate = false
 
-[node name="Sprite" type="Sprite" parent="Lane4/Hitter"]
+[node name="Sprite" type="Sprite" parent="LaneContainer/Lane4/Hitter"]
 modulate = Color( 1, 1, 1, 0.498039 )
 texture = ExtResource( 3 )
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+download_file = "res://level/Level1.tempo"
 
 [node name="Metronome" type="Timer" parent="."]
 process_mode = 0
+
+[node name="Beep" type="AudioStreamPlayer" parent="Metronome"]
+stream = ExtResource( 4 )
+volume_db = -20.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.00146484
+margin_top = -48.0
+margin_right = 0.00146484
+margin_bottom = -48.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/GridContainer"]
+mouse_filter = 2
