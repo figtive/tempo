@@ -1,11 +1,12 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://controller/LevelController.gd" type="Script" id=1]
 [ext_resource path="res://entity/lane/Lane.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://entity/lane/HitterButton.gd" type="Script" id=4]
 [ext_resource path="res://sound/beep.wav" type="AudioStream" id=5]
-[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://music/Ondel Ondel - Jakarta.wav" type="AudioStream" id=6]
+[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -38,7 +39,7 @@ size = 72
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 6 )
+font_data = ExtResource( 7 )
 
 [node name="Level1" type="Node"]
 script = ExtResource( 1 )
@@ -72,7 +73,8 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="DEBUG_hitline" type="Polygon2D" parent="LaneContainer"]
-position = Vector2( -592, -216 )
+editor/display_folded = true
+position = Vector2( -592, -912 )
 scale = Vector2( 3.21429, 1 )
 polygon = PoolVector2Array( 408.177, 1224, 184.178, 1224, 184.178, 1304, 408.177, 1304 )
 
@@ -82,6 +84,7 @@ playback_process_mode = 0
 playback/repeat = true
 
 [node name="Lane1" type="Path2D" parent="LaneContainer"]
+editor/display_folded = true
 curve = SubResource( 1 )
 script = ExtResource( 2 )
 
@@ -105,8 +108,10 @@ shape = SubResource( 2 )
 script = ExtResource( 4 )
 
 [node name="Lane2" type="Path2D" parent="LaneContainer"]
+editor/display_folded = true
 curve = SubResource( 3 )
 script = ExtResource( 2 )
+lane_number = 1
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane2"]
 points = PoolVector2Array( 344, 352, 256, 1280 )
@@ -128,8 +133,10 @@ shape = SubResource( 4 )
 script = ExtResource( 4 )
 
 [node name="Lane3" type="Path2D" parent="LaneContainer"]
+editor/display_folded = true
 curve = SubResource( 5 )
 script = ExtResource( 2 )
+lane_number = 2
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane3"]
 points = PoolVector2Array( 376, 352, 464, 1280 )
@@ -151,8 +158,10 @@ shape = SubResource( 4 )
 script = ExtResource( 4 )
 
 [node name="Lane4" type="Path2D" parent="LaneContainer"]
+editor/display_folded = true
 curve = SubResource( 6 )
 script = ExtResource( 2 )
+lane_number = 3
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane4"]
 points = PoolVector2Array( 408, 352, 672, 1280 )
@@ -177,14 +186,21 @@ script = ExtResource( 4 )
 download_file = "res://level/Level1.tempo"
 
 [node name="Metronome" type="Timer" parent="."]
+editor/display_folded = true
 process_mode = 0
 
 [node name="Beep" type="AudioStreamPlayer" parent="Metronome"]
 stream = ExtResource( 5 )
 volume_db = -20.0
 
+[node name="OffsetTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-editor/display_folded = true
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 margin_left = 456.0
@@ -192,5 +208,21 @@ margin_top = 16.0
 margin_right = 707.0
 margin_bottom = 104.0
 custom_fonts/font = SubResource( 7 )
-text = "100"
+text = "0"
 align = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 267.0
+margin_bottom = 104.0
+custom_fonts/font = SubResource( 7 )
+text = "120 bpm"
+
+[node name="Label3" type="Label" parent="CanvasLayer"]
+margin_left = 16.0
+margin_top = 88.0
+margin_right = 324.0
+margin_bottom = 176.0
+custom_fonts/font = SubResource( 7 )
+text = "1.24 s"
