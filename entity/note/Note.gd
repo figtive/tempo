@@ -8,7 +8,7 @@ export(Texture) var texture_right
 export(Texture) var texture_tap
 
 const START_POS = 0		# DO NOT CHANGE!
-const END_POS = 2		# DO NOT CHANGE!
+const END_POS = 1		# DO NOT CHANGE!
 var TYPE
 
 var hittable = false
@@ -16,10 +16,7 @@ var hittable = false
 func _ready():
 	$Tween.interpolate_property(self, "unit_offset",
 		START_POS, END_POS, GameManager.NOTE_SPEED,
-		Tween.TRANS_QUAD, Tween.EASE_OUT)
-#	$Tween.interpolate_property(self, "unit_offset",
-#		START_POS, END_POS, GameManager.NOTE_SPEED,
-#		Tween.TRANS_LINEAR, Tween.EASE_IN)
+		Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
 	
 func set_type(type):

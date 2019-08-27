@@ -20,9 +20,9 @@ func pass_note(note, is_hit):
 		queue[lane_number].pop_front()
 	if is_hit:
 		GameManager.SCORE += 1
-	else:		
-		pass
-#		GameManager.SCORE -= 5
+	else:
+		pass		
+	#	GameManager.SCORE -= 5
 
 func hit(action):
 	var result
