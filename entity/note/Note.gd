@@ -17,6 +17,9 @@ func _ready():
 	$Tween.interpolate_property(self, "unit_offset",
 		START_POS, END_POS, GameManager.NOTE_SPEED,
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.interpolate_property($Sprite, "scale",
+		$Sprite.scale, Vector2(1.1, 1.1), GameManager.NOTE_SPEED,
+		Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
 	
 func set_type(type):

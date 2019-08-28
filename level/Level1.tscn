@@ -1,45 +1,50 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://controller/LevelController.gd" type="Script" id=1]
 [ext_resource path="res://entity/lane/Lane.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://entity/lane/HitterButton.gd" type="Script" id=4]
-[ext_resource path="res://sound/beep.wav" type="AudioStream" id=5]
-[ext_resource path="res://music/Ondel Ondel - Jakarta.wav" type="AudioStream" id=6]
-[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://entity/lane/sprites/sprite_1.png" type="Texture" id=5]
+[ext_resource path="res://entity/lane/sprites/sprite_0.png" type="Texture" id=6]
+[ext_resource path="res://sound/beep.wav" type="AudioStream" id=7]
+[ext_resource path="res://music/Ondel Ondel - Jakarta.wav" type="AudioStream" id=8]
+[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=9]
 
-[sub_resource type="Curve2D" id=1]
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/sprite_1.png-e4699a897cfd876e134cc5ac0e0ad330.stex"
+
+[sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 312, 352, 0, 0, 0, 0, 48, 1280 )
+"points": PoolVector2Array( 0, 0, 0, 0, 272, 352, 0, 0, 0, 0, 144, 1280 )
 }
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 32.0
 
-[sub_resource type="Curve2D" id=3]
+[sub_resource type="Curve2D" id=4]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 344, 352, 0, 0, 0, 0, 256, 1280 )
+"points": PoolVector2Array( 0, 0, 0, 0, 328, 352, 0, 0, 0, 0, 280, 1280 )
 }
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=5]
 radius = 32.0
-
-[sub_resource type="Curve2D" id=5]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 376, 352, 0, 0, 0, 0, 464, 1280 )
-}
 
 [sub_resource type="Curve2D" id=6]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 408, 352, 0, 0, 0, 0, 672, 1280 )
+"points": PoolVector2Array( 0, 0, 0, 0, 392, 352, 0, 0, 0, 0, 440, 1280 )
 }
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="Curve2D" id=7]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 448, 352, 0, 0, 0, 0, 576, 1280 )
+}
+
+[sub_resource type="DynamicFont" id=8]
 size = 72
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 7 )
+font_data = ExtResource( 9 )
 
 [node name="Level1" type="Node"]
 script = ExtResource( 1 )
@@ -49,6 +54,138 @@ __meta__ = {
 }
 tempo_data = "res://music/test.tempo"
 auto_offset = true
+
+[node name="LaneContainer2" type="VBoxContainer" parent="."]
+editor/display_folded = true
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 1208.0
+margin_top = -1280.0
+margin_right = 1928.0
+grow_horizontal = 2
+grow_vertical = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DEBUG_hitline" type="Polygon2D" parent="LaneContainer2"]
+editor/display_folded = true
+position = Vector2( -592, -816 )
+scale = Vector2( 3.21429, 1 )
+polygon = PoolVector2Array( 408.177, 1224, 184.178, 1224, 184.178, 1304, 408.177, 1304 )
+
+[node name="Wrong" type="Tween" parent="LaneContainer2/DEBUG_hitline"]
+playback_process_mode = 0
+
+[node name="Correct" type="Tween" parent="LaneContainer2/DEBUG_hitline"]
+playback_process_mode = 0
+
+[node name="Sprite" type="Sprite" parent="LaneContainer2"]
+position = Vector2( 360, 408 )
+scale = Vector2( 0.703124, 0.851562 )
+texture = SubResource( 1 )
+
+[node name="Lane1" type="Path2D" parent="LaneContainer2"]
+editor/display_folded = true
+curve = SubResource( 2 )
+script = ExtResource( 2 )
+
+[node name="Line2D" type="Line2D" parent="LaneContainer2/Lane1"]
+points = PoolVector2Array( 312, 352, 48, 1280 )
+width = 4.0
+texture_mode = 1074266112
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Hitter" type="PathFollow2D" parent="LaneContainer2/Lane1"]
+position = Vector2( 173.182, 1068.43 )
+offset = 723.534
+rotate = false
+
+[node name="Button" type="TouchScreenButton" parent="LaneContainer2/Lane1/Hitter"]
+position = Vector2( -32, -32 )
+normal = ExtResource( 3 )
+shape = SubResource( 3 )
+script = ExtResource( 4 )
+
+[node name="Lane2" type="Path2D" parent="LaneContainer2"]
+editor/display_folded = true
+curve = SubResource( 4 )
+script = ExtResource( 2 )
+lane_number = 1
+
+[node name="Line2D" type="Line2D" parent="LaneContainer2/Lane2"]
+points = PoolVector2Array( 344, 352, 256, 1280 )
+width = 4.0
+texture_mode = 1074266112
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Hitter" type="PathFollow2D" parent="LaneContainer2/Lane2"]
+position = Vector2( 291.825, 1051.39 )
+offset = 699.283
+rotate = false
+
+[node name="Button" type="TouchScreenButton" parent="LaneContainer2/Lane2/Hitter"]
+position = Vector2( -32, -32 )
+normal = ExtResource( 3 )
+shape = SubResource( 5 )
+script = ExtResource( 4 )
+
+[node name="Lane3" type="Path2D" parent="LaneContainer2"]
+editor/display_folded = true
+curve = SubResource( 6 )
+script = ExtResource( 2 )
+lane_number = 2
+
+[node name="Line2D" type="Line2D" parent="LaneContainer2/Lane3"]
+points = PoolVector2Array( 376, 352, 464, 1280 )
+width = 4.0
+texture_mode = 1074266112
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Hitter" type="PathFollow2D" parent="LaneContainer2/Lane3"]
+position = Vector2( 428.175, 1051.39 )
+offset = 699.283
+rotate = false
+
+[node name="Button" type="TouchScreenButton" parent="LaneContainer2/Lane3/Hitter"]
+position = Vector2( -32, -32 )
+normal = ExtResource( 3 )
+shape = SubResource( 5 )
+script = ExtResource( 4 )
+
+[node name="Lane4" type="Path2D" parent="LaneContainer2"]
+editor/display_folded = true
+curve = SubResource( 7 )
+script = ExtResource( 2 )
+lane_number = 3
+
+[node name="Line2D" type="Line2D" parent="LaneContainer2/Lane4"]
+points = PoolVector2Array( 408, 352, 672, 1280 )
+width = 4.0
+texture_mode = 1074266112
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Hitter" type="PathFollow2D" parent="LaneContainer2/Lane4"]
+position = Vector2( 546.818, 1068.43 )
+offset = 723.534
+rotate = false
+
+[node name="Button" type="TouchScreenButton" parent="LaneContainer2/Lane4/Hitter"]
+position = Vector2( -32, -32 )
+normal = ExtResource( 3 )
+shape = SubResource( 5 )
+script = ExtResource( 4 )
 
 [node name="DEBUG_align" type="Polygon2D" parent="."]
 visible = false
@@ -74,7 +211,8 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="DEBUG_hitline" type="Polygon2D" parent="LaneContainer"]
-position = Vector2( -592, -912 )
+editor/display_folded = true
+position = Vector2( -592, -816 )
 scale = Vector2( 3.21429, 1 )
 polygon = PoolVector2Array( 408.177, 1224, 184.178, 1224, 184.178, 1304, 408.177, 1304 )
 
@@ -84,13 +222,17 @@ playback_process_mode = 0
 [node name="Correct" type="Tween" parent="LaneContainer/DEBUG_hitline"]
 playback_process_mode = 0
 
+[node name="Sprite" type="Sprite" parent="LaneContainer"]
+position = Vector2( 360, 560 )
+texture = ExtResource( 5 )
+region_rect = Rect2( 301, 216, 116, 140 )
+
 [node name="Lane1" type="Path2D" parent="LaneContainer"]
-editor/display_folded = true
-curve = SubResource( 1 )
+curve = SubResource( 2 )
 script = ExtResource( 2 )
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane1"]
-points = PoolVector2Array( 312, 352, 48, 1280 )
+points = PoolVector2Array( 272, 352, 144, 1280 )
 width = 4.0
 texture_mode = 1074266112
 __meta__ = {
@@ -98,24 +240,23 @@ __meta__ = {
 }
 
 [node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane1"]
-position = Vector2( 114.001, 1048 )
-offset = 723.534
+position = Vector2( 176.009, 1047.94 )
+offset = 703.041
 rotate = false
 
 [node name="Button" type="TouchScreenButton" parent="LaneContainer/Lane1/Hitter"]
 position = Vector2( -32, -32 )
 normal = ExtResource( 3 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 script = ExtResource( 4 )
 
 [node name="Lane2" type="Path2D" parent="LaneContainer"]
-editor/display_folded = true
-curve = SubResource( 3 )
+curve = SubResource( 4 )
 script = ExtResource( 2 )
 lane_number = 1
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane2"]
-points = PoolVector2Array( 344, 352, 256, 1280 )
+points = PoolVector2Array( 328, 352, 280, 1280 )
 width = 4.0
 texture_mode = 1074266112
 __meta__ = {
@@ -123,24 +264,23 @@ __meta__ = {
 }
 
 [node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane2"]
-position = Vector2( 278.041, 1047.57 )
-offset = 699.283
+position = Vector2( 291.992, 1048.16 )
+offset = 696.021
 rotate = false
 
 [node name="Button" type="TouchScreenButton" parent="LaneContainer/Lane2/Hitter"]
 position = Vector2( -32, -32 )
 normal = ExtResource( 3 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 script = ExtResource( 4 )
 
 [node name="Lane3" type="Path2D" parent="LaneContainer"]
-editor/display_folded = true
-curve = SubResource( 5 )
+curve = SubResource( 6 )
 script = ExtResource( 2 )
 lane_number = 2
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane3"]
-points = PoolVector2Array( 376, 352, 464, 1280 )
+points = PoolVector2Array( 392, 352, 440, 1280 )
 width = 4.0
 texture_mode = 1074266112
 __meta__ = {
@@ -148,24 +288,23 @@ __meta__ = {
 }
 
 [node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane3"]
-position = Vector2( 441.959, 1047.57 )
-offset = 699.283
+position = Vector2( 428.008, 1048.16 )
+offset = 696.021
 rotate = false
 
 [node name="Button" type="TouchScreenButton" parent="LaneContainer/Lane3/Hitter"]
 position = Vector2( -32, -32 )
 normal = ExtResource( 3 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 script = ExtResource( 4 )
 
 [node name="Lane4" type="Path2D" parent="LaneContainer"]
-editor/display_folded = true
-curve = SubResource( 6 )
+curve = SubResource( 7 )
 script = ExtResource( 2 )
 lane_number = 3
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane4"]
-points = PoolVector2Array( 408, 352, 672, 1280 )
+points = PoolVector2Array( 448, 352, 576, 1280 )
 width = 4.0
 texture_mode = 1074266112
 __meta__ = {
@@ -173,15 +312,30 @@ __meta__ = {
 }
 
 [node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane4"]
-position = Vector2( 605.999, 1048 )
-offset = 723.534
+position = Vector2( 543.991, 1047.94 )
+offset = 703.041
 rotate = false
 
 [node name="Button" type="TouchScreenButton" parent="LaneContainer/Lane4/Hitter"]
 position = Vector2( -32, -32 )
 normal = ExtResource( 3 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 script = ExtResource( 4 )
+
+[node name="StageContainer" type="VBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Background" type="Sprite" parent="StageContainer"]
+visible = false
+
+[node name="MockBackground" type="Polygon2D" parent="StageContainer"]
+color = Color( 0.403922, 0.815686, 0.996078, 1 )
+polygon = PoolVector2Array( 720, 0, 720, 440, 0, 440, 0, 0 )
+
+[node name="Stage" type="Sprite" parent="StageContainer"]
+position = Vector2( 360, 720 )
+texture = ExtResource( 6 )
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 download_file = "res://level/Level1.tempo"
@@ -191,7 +345,7 @@ editor/display_folded = true
 process_mode = 0
 
 [node name="Beep" type="AudioStreamPlayer" parent="Metronome"]
-stream = ExtResource( 5 )
+stream = ExtResource( 7 )
 volume_db = -20.0
 
 [node name="OffsetTimer" type="Timer" parent="."]
@@ -199,7 +353,7 @@ process_mode = 0
 one_shot = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource( 8 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -208,7 +362,7 @@ margin_left = 456.0
 margin_top = 16.0
 margin_right = 707.0
 margin_bottom = 104.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 text = "0"
 align = 2
 
@@ -217,7 +371,7 @@ margin_left = 16.0
 margin_top = 16.0
 margin_right = 267.0
 margin_bottom = 104.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 text = "120 bpm"
 
 [node name="Label3" type="Label" parent="CanvasLayer"]
@@ -225,7 +379,7 @@ margin_left = 16.0
 margin_top = 88.0
 margin_right = 324.0
 margin_bottom = 176.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 text = "1.24 s"
 
 [node name="Label4" type="Label" parent="CanvasLayer"]
@@ -233,5 +387,5 @@ margin_left = 16.0
 margin_top = 160.0
 margin_right = 324.0
 margin_bottom = 248.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 text = "0"
