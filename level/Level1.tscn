@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://controller/LevelController.gd" type="Script" id=1]
 [ext_resource path="res://entity/lane/Lane.gd" type="Script" id=2]
@@ -6,9 +6,10 @@
 [ext_resource path="res://entity/lane/HitterButton.gd" type="Script" id=4]
 [ext_resource path="res://entity/lane/sprites/sprite_1.png" type="Texture" id=5]
 [ext_resource path="res://entity/lane/sprites/sprite_0.png" type="Texture" id=6]
-[ext_resource path="res://sound/beep.wav" type="AudioStream" id=7]
-[ext_resource path="res://music/Ondel Ondel - Jakarta.wav" type="AudioStream" id=8]
-[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://entity/dancer/Dancer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sound/beep.wav" type="AudioStream" id=8]
+[ext_resource path="res://music/Ondel Ondel - Jakarta.wav" type="AudioStream" id=9]
+[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/sprite_1.png-e4699a897cfd876e134cc5ac0e0ad330.stex"
@@ -44,7 +45,7 @@ size = 72
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 9 )
+font_data = ExtResource( 10 )
 
 [node name="Level1" type="Node"]
 script = ExtResource( 1 )
@@ -337,6 +338,8 @@ polygon = PoolVector2Array( 720, 0, 720, 440, 0, 440, 0, 0 )
 position = Vector2( 360, 720 )
 texture = ExtResource( 6 )
 
+[node name="Dancer" parent="StageContainer" instance=ExtResource( 7 )]
+
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 download_file = "res://level/Level1.tempo"
 
@@ -345,7 +348,7 @@ editor/display_folded = true
 process_mode = 0
 
 [node name="Beep" type="AudioStreamPlayer" parent="Metronome"]
-stream = ExtResource( 7 )
+stream = ExtResource( 8 )
 volume_db = -20.0
 
 [node name="OffsetTimer" type="Timer" parent="."]
@@ -353,7 +356,7 @@ process_mode = 0
 one_shot = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+stream = ExtResource( 9 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
