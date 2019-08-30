@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://controller/LevelController.gd" type="Script" id=1]
 [ext_resource path="res://music/Ondel Ondel - Jakarta.wav" type="AudioStream" id=2]
@@ -6,12 +6,13 @@
 [ext_resource path="res://entity/lane/Lane.gd" type="Script" id=4]
 [ext_resource path="res://icon.png" type="Texture" id=5]
 [ext_resource path="res://entity/lane/HitterButton.gd" type="Script" id=6]
-[ext_resource path="res://entity/lane/sprites/sprite_0.png" type="Texture" id=7]
-[ext_resource path="res://entity/dancer/Dancer.tscn" type="PackedScene" id=8]
-[ext_resource path="res://entity/dancer/sprites/Dancer_Man_OndelOndel (2).png" type="Texture" id=9]
-[ext_resource path="res://entity/dancer/sprites/Dancer_Woman_OndelOndel (2).png" type="Texture" id=10]
-[ext_resource path="res://sound/beep.wav" type="AudioStream" id=11]
-[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://entity/lane/sprites/sprite_2.png" type="Texture" id=7]
+[ext_resource path="res://entity/lane/sprites/sprite_0.png" type="Texture" id=8]
+[ext_resource path="res://entity/dancer/Dancer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://entity/dancer/sprites/Dancer_Man_OndelOndel (2).png" type="Texture" id=10]
+[ext_resource path="res://entity/dancer/sprites/Dancer_Woman_OndelOndel (2).png" type="Texture" id=11]
+[ext_resource path="res://sound/beep.wav" type="AudioStream" id=12]
+[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=13]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -61,20 +62,20 @@ size = 42
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 12 )
+font_data = ExtResource( 13 )
 
 [sub_resource type="DynamicFont" id=10]
 size = 52
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 12 )
+font_data = ExtResource( 13 )
 
 [sub_resource type="DynamicFont" id=11]
 size = 32
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 12 )
+font_data = ExtResource( 13 )
 
 [node name="Level1" type="Node"]
 script = ExtResource( 1 )
@@ -112,18 +113,6 @@ margin_top = -1280.0
 margin_right = 360.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="DEBUG_hitline" type="Polygon2D" parent="LaneContainer"]
-editor/display_folded = true
-position = Vector2( -592, -816 )
-scale = Vector2( 3.21429, 1 )
-polygon = PoolVector2Array( 408.177, 1224, 184.178, 1224, 184.178, 1304, 408.177, 1304 )
-
-[node name="Wrong" type="Tween" parent="LaneContainer/DEBUG_hitline"]
-playback_process_mode = 0
-
-[node name="Correct" type="Tween" parent="LaneContainer/DEBUG_hitline"]
-playback_process_mode = 0
 
 [node name="Sprite" type="Sprite" parent="LaneContainer"]
 position = Vector2( 360, 560 )
@@ -235,32 +224,36 @@ margin_right = 720.0
 margin_bottom = 1280.0
 
 [node name="Background" type="Sprite" parent="StageContainer"]
+position = Vector2( 360, 720 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 7 )
 
 [node name="MockBackground" type="Polygon2D" parent="StageContainer/Background"]
+visible = false
 color = Color( 0.403922, 0.815686, 0.996078, 1 )
 polygon = PoolVector2Array( 720, 0, 720, 528, 0, 528, 0, 0 )
 
 [node name="Stage" type="Sprite" parent="StageContainer"]
-position = Vector2( 360, 768 )
+position = Vector2( 360, 808 )
 scale = Vector2( 0.75, 0.75 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
-[node name="Dancer" parent="StageContainer" instance=ExtResource( 8 )]
-position = Vector2( 264, 361.6 )
+[node name="Dancer" parent="StageContainer" instance=ExtResource( 9 )]
+position = Vector2( 264, 385.6 )
 script = SubResource( 9 )
-DANCER_SPRITE = ExtResource( 9 )
+DANCER_SPRITE = ExtResource( 10 )
 FRAME_COUNT = 36
 
-[node name="Dancer2" parent="StageContainer" instance=ExtResource( 8 )]
-position = Vector2( 456, 361.6 )
-DANCER_SPRITE = ExtResource( 10 )
+[node name="Dancer2" parent="StageContainer" instance=ExtResource( 9 )]
+position = Vector2( 456, 385.6 )
+DANCER_SPRITE = ExtResource( 11 )
 FRAME_COUNT = 33
 
 [node name="Metronome" type="Timer" parent="."]
 process_mode = 0
 
 [node name="Beep" type="AudioStreamPlayer" parent="Metronome"]
-stream = ExtResource( 11 )
+stream = ExtResource( 12 )
 volume_db = -55.0
 
 [node name="OffsetTimer" type="Timer" parent="."]
