@@ -9,6 +9,7 @@ export(Texture) var texture_tap
 
 const START_POS = 0		# DO NOT CHANGE!
 const END_POS = 1		# DO NOT CHANGE!
+const GROW_SIZE = Vector2(1.05, 1.05)
 var TYPE
 
 var hittable = false
@@ -18,7 +19,7 @@ func _ready():
 		START_POS, END_POS, GameManager.NOTE_SPEED,
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.interpolate_property($Sprite, "scale",
-		$Sprite.scale, Vector2(1.1, 1.1), GameManager.NOTE_SPEED,
+		$Sprite.scale, GROW_SIZE, GameManager.NOTE_SPEED,
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
 	

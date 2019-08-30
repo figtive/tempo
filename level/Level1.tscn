@@ -1,206 +1,108 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://controller/LevelController.gd" type="Script" id=1]
-[ext_resource path="res://entity/lane/Lane.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
-[ext_resource path="res://entity/lane/HitterButton.gd" type="Script" id=4]
-[ext_resource path="res://entity/lane/sprites/sprite_1.png" type="Texture" id=5]
-[ext_resource path="res://entity/lane/sprites/sprite_0.png" type="Texture" id=6]
-[ext_resource path="res://entity/dancer/Dancer.tscn" type="PackedScene" id=7]
-[ext_resource path="res://sound/beep.wav" type="AudioStream" id=8]
-[ext_resource path="res://music/Ondel Ondel - Jakarta.wav" type="AudioStream" id=9]
-[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://music/Ondel Ondel - Jakarta.wav" type="AudioStream" id=2]
+[ext_resource path="res://entity/lane/sprites/sprite_1.png" type="Texture" id=3]
+[ext_resource path="res://entity/lane/Lane.gd" type="Script" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
+[ext_resource path="res://entity/lane/HitterButton.gd" type="Script" id=6]
+[ext_resource path="res://entity/lane/sprites/sprite_0.png" type="Texture" id=7]
+[ext_resource path="res://entity/dancer/Dancer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://entity/dancer/sprites/Dancer_Man_OndelOndel (2).png" type="Texture" id=9]
+[ext_resource path="res://entity/dancer/sprites/Dancer_Woman_OndelOndel (2).png" type="Texture" id=10]
+[ext_resource path="res://sound/beep.wav" type="AudioStream" id=11]
+[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=12]
 
-[sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/sprite_1.png-e4699a897cfd876e134cc5ac0e0ad330.stex"
-
-[sub_resource type="Curve2D" id=2]
+[sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 272, 352, 0, 0, 0, 0, 144, 1280 )
+"points": PoolVector2Array( 0, 0, 0, 0, 288, 184, 0, 0, 0, 0, 96, 1440 )
 }
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=2]
 radius = 32.0
 
-[sub_resource type="Curve2D" id=4]
+[sub_resource type="Curve2D" id=3]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 328, 352, 0, 0, 0, 0, 280, 1280 )
+"points": PoolVector2Array( 0, 0, 0, 0, 336, 184, 0, 0, 0, 0, 272, 1440 )
 }
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=4]
 radius = 32.0
+
+[sub_resource type="Curve2D" id=5]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 384, 184, 0, 0, 0, 0, 448, 1440 )
+}
 
 [sub_resource type="Curve2D" id=6]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 392, 352, 0, 0, 0, 0, 440, 1280 )
+"points": PoolVector2Array( 0, 0, 0, 0, 432, 184, 0, 0, 0, 0, 624, 1440 )
 }
 
-[sub_resource type="Curve2D" id=7]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 448, 352, 0, 0, 0, 0, 576, 1280 )
-}
+[sub_resource type="GDScript" id=9]
+script/source = "extends Sprite
 
-[sub_resource type="DynamicFont" id=8]
-size = 72
+export(Texture) var DANCER_SPRITE
+export(int) var FRAME_COUNT
+
+var counter = 0
+
+func _ready():
+	self.texture = DANCER_SPRITE
+	self.hframes = FRAME_COUNT
+	self.frame = counter
+
+func next(step=counter):
+	counter = (step + 1) % FRAME_COUNT
+	self.frame = step"
+
+[sub_resource type="DynamicFont" id=7]
+size = 42
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 10 )
+font_data = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 52
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 32
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 12 )
 
 [node name="Level1" type="Node"]
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_horizontal_guides_": [ 352.0, 1048.0, 576.0 ],
+"_edit_horizontal_guides_": [ 352.0, 1115.26, 576.0 ],
 "_edit_vertical_guides_": [ 360.0 ]
 }
-tempo_data = "res://music/test.tempo"
+tempo_data = "res://music/Ondel Ondel - Jakarta.tempo"
+music = ExtResource( 2 )
 auto_offset = true
-
-[node name="LaneContainer2" type="VBoxContainer" parent="."]
-editor/display_folded = true
-visible = false
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 1208.0
-margin_top = -1280.0
-margin_right = 1928.0
-grow_horizontal = 2
-grow_vertical = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="DEBUG_hitline" type="Polygon2D" parent="LaneContainer2"]
-editor/display_folded = true
-position = Vector2( -592, -816 )
-scale = Vector2( 3.21429, 1 )
-polygon = PoolVector2Array( 408.177, 1224, 184.178, 1224, 184.178, 1304, 408.177, 1304 )
-
-[node name="Wrong" type="Tween" parent="LaneContainer2/DEBUG_hitline"]
-playback_process_mode = 0
-
-[node name="Correct" type="Tween" parent="LaneContainer2/DEBUG_hitline"]
-playback_process_mode = 0
-
-[node name="Sprite" type="Sprite" parent="LaneContainer2"]
-position = Vector2( 360, 408 )
-scale = Vector2( 0.703124, 0.851562 )
-texture = SubResource( 1 )
-
-[node name="Lane1" type="Path2D" parent="LaneContainer2"]
-editor/display_folded = true
-curve = SubResource( 2 )
-script = ExtResource( 2 )
-
-[node name="Line2D" type="Line2D" parent="LaneContainer2/Lane1"]
-points = PoolVector2Array( 312, 352, 48, 1280 )
-width = 4.0
-texture_mode = 1074266112
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Hitter" type="PathFollow2D" parent="LaneContainer2/Lane1"]
-position = Vector2( 173.182, 1068.43 )
-offset = 723.534
-rotate = false
-
-[node name="Button" type="TouchScreenButton" parent="LaneContainer2/Lane1/Hitter"]
-position = Vector2( -32, -32 )
-normal = ExtResource( 3 )
-shape = SubResource( 3 )
-script = ExtResource( 4 )
-
-[node name="Lane2" type="Path2D" parent="LaneContainer2"]
-editor/display_folded = true
-curve = SubResource( 4 )
-script = ExtResource( 2 )
-lane_number = 1
-
-[node name="Line2D" type="Line2D" parent="LaneContainer2/Lane2"]
-points = PoolVector2Array( 344, 352, 256, 1280 )
-width = 4.0
-texture_mode = 1074266112
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Hitter" type="PathFollow2D" parent="LaneContainer2/Lane2"]
-position = Vector2( 291.825, 1051.39 )
-offset = 699.283
-rotate = false
-
-[node name="Button" type="TouchScreenButton" parent="LaneContainer2/Lane2/Hitter"]
-position = Vector2( -32, -32 )
-normal = ExtResource( 3 )
-shape = SubResource( 5 )
-script = ExtResource( 4 )
-
-[node name="Lane3" type="Path2D" parent="LaneContainer2"]
-editor/display_folded = true
-curve = SubResource( 6 )
-script = ExtResource( 2 )
-lane_number = 2
-
-[node name="Line2D" type="Line2D" parent="LaneContainer2/Lane3"]
-points = PoolVector2Array( 376, 352, 464, 1280 )
-width = 4.0
-texture_mode = 1074266112
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Hitter" type="PathFollow2D" parent="LaneContainer2/Lane3"]
-position = Vector2( 428.175, 1051.39 )
-offset = 699.283
-rotate = false
-
-[node name="Button" type="TouchScreenButton" parent="LaneContainer2/Lane3/Hitter"]
-position = Vector2( -32, -32 )
-normal = ExtResource( 3 )
-shape = SubResource( 5 )
-script = ExtResource( 4 )
-
-[node name="Lane4" type="Path2D" parent="LaneContainer2"]
-editor/display_folded = true
-curve = SubResource( 7 )
-script = ExtResource( 2 )
-lane_number = 3
-
-[node name="Line2D" type="Line2D" parent="LaneContainer2/Lane4"]
-points = PoolVector2Array( 408, 352, 672, 1280 )
-width = 4.0
-texture_mode = 1074266112
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Hitter" type="PathFollow2D" parent="LaneContainer2/Lane4"]
-position = Vector2( 546.818, 1068.43 )
-offset = 723.534
-rotate = false
-
-[node name="Button" type="TouchScreenButton" parent="LaneContainer2/Lane4/Hitter"]
-position = Vector2( -32, -32 )
-normal = ExtResource( 3 )
-shape = SubResource( 5 )
-script = ExtResource( 4 )
+offset = -0.25
 
 [node name="DEBUG_align" type="Polygon2D" parent="."]
 visible = false
 position = Vector2( -144, 0 )
-polygon = PoolVector2Array( 400, 1280, 192, 1280, 192, 1296, 400, 1296 )
-__meta__ = {
-"_edit_group_": true
-}
+polygon = PoolVector2Array( 584, 1280, 424, 1280, 424, 1304, 584, 1304 )
+
+[node name="DEBUG_align2" type="Polygon2D" parent="."]
+visible = false
+position = Vector2( -320, 160 )
+polygon = PoolVector2Array( 592, 1280, 416, 1280, 416, 1304, 592, 1304 )
 
 [node name="Background" type="Polygon2D" parent="."]
 visible = false
 polygon = PoolVector2Array( 0, 0, 0, 1280, 720, 1280, 720, 0 )
 
 [node name="LaneContainer" type="VBoxContainer" parent="."]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -225,15 +127,17 @@ playback_process_mode = 0
 
 [node name="Sprite" type="Sprite" parent="LaneContainer"]
 position = Vector2( 360, 560 )
-texture = ExtResource( 5 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 3 )
 region_rect = Rect2( 301, 216, 116, 140 )
 
 [node name="Lane1" type="Path2D" parent="LaneContainer"]
-curve = SubResource( 2 )
-script = ExtResource( 2 )
+curve = SubResource( 1 )
+script = ExtResource( 4 )
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane1"]
-points = PoolVector2Array( 272, 352, 144, 1280 )
+visible = false
+points = PoolVector2Array( 288, 184, 96, 1440 )
 width = 4.0
 texture_mode = 1074266112
 __meta__ = {
@@ -241,23 +145,24 @@ __meta__ = {
 }
 
 [node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane1"]
-position = Vector2( 176.009, 1047.94 )
-offset = 703.041
+position = Vector2( 145.973, 1113.09 )
+offset = 939.239
 rotate = false
 
 [node name="Button" type="TouchScreenButton" parent="LaneContainer/Lane1/Hitter"]
 position = Vector2( -32, -32 )
-normal = ExtResource( 3 )
-shape = SubResource( 3 )
-script = ExtResource( 4 )
+normal = ExtResource( 5 )
+shape = SubResource( 2 )
+script = ExtResource( 6 )
 
 [node name="Lane2" type="Path2D" parent="LaneContainer"]
-curve = SubResource( 4 )
-script = ExtResource( 2 )
+curve = SubResource( 3 )
+script = ExtResource( 4 )
 lane_number = 1
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane2"]
-points = PoolVector2Array( 328, 352, 280, 1280 )
+visible = false
+points = PoolVector2Array( 336, 184, 272, 1440 )
 width = 4.0
 texture_mode = 1074266112
 __meta__ = {
@@ -265,23 +170,24 @@ __meta__ = {
 }
 
 [node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane2"]
-position = Vector2( 291.992, 1048.16 )
-offset = 696.021
+position = Vector2( 288.642, 1113.4 )
+offset = 931.01
 rotate = false
 
 [node name="Button" type="TouchScreenButton" parent="LaneContainer/Lane2/Hitter"]
 position = Vector2( -32, -32 )
-normal = ExtResource( 3 )
-shape = SubResource( 5 )
-script = ExtResource( 4 )
+normal = ExtResource( 5 )
+shape = SubResource( 4 )
+script = ExtResource( 6 )
 
 [node name="Lane3" type="Path2D" parent="LaneContainer"]
-curve = SubResource( 6 )
-script = ExtResource( 2 )
+curve = SubResource( 5 )
+script = ExtResource( 4 )
 lane_number = 2
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane3"]
-points = PoolVector2Array( 392, 352, 440, 1280 )
+visible = false
+points = PoolVector2Array( 384, 184, 448, 1440 )
 width = 4.0
 texture_mode = 1074266112
 __meta__ = {
@@ -289,23 +195,24 @@ __meta__ = {
 }
 
 [node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane3"]
-position = Vector2( 428.008, 1048.16 )
-offset = 696.021
+position = Vector2( 431.358, 1113.4 )
+offset = 931.01
 rotate = false
 
 [node name="Button" type="TouchScreenButton" parent="LaneContainer/Lane3/Hitter"]
 position = Vector2( -32, -32 )
-normal = ExtResource( 3 )
-shape = SubResource( 5 )
-script = ExtResource( 4 )
+normal = ExtResource( 5 )
+shape = SubResource( 4 )
+script = ExtResource( 6 )
 
 [node name="Lane4" type="Path2D" parent="LaneContainer"]
-curve = SubResource( 7 )
-script = ExtResource( 2 )
+curve = SubResource( 6 )
+script = ExtResource( 4 )
 lane_number = 3
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane4"]
-points = PoolVector2Array( 448, 352, 576, 1280 )
+visible = false
+points = PoolVector2Array( 432, 184, 624, 1440 )
 width = 4.0
 texture_mode = 1074266112
 __meta__ = {
@@ -313,82 +220,111 @@ __meta__ = {
 }
 
 [node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane4"]
-position = Vector2( 543.991, 1047.94 )
-offset = 703.041
+position = Vector2( 574.027, 1113.09 )
+offset = 939.239
 rotate = false
 
 [node name="Button" type="TouchScreenButton" parent="LaneContainer/Lane4/Hitter"]
 position = Vector2( -32, -32 )
-normal = ExtResource( 3 )
-shape = SubResource( 5 )
-script = ExtResource( 4 )
+normal = ExtResource( 5 )
+shape = SubResource( 4 )
+script = ExtResource( 6 )
 
 [node name="StageContainer" type="VBoxContainer" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 720.0
+margin_bottom = 1280.0
 
 [node name="Background" type="Sprite" parent="StageContainer"]
-visible = false
 
-[node name="MockBackground" type="Polygon2D" parent="StageContainer"]
+[node name="MockBackground" type="Polygon2D" parent="StageContainer/Background"]
 color = Color( 0.403922, 0.815686, 0.996078, 1 )
-polygon = PoolVector2Array( 720, 0, 720, 440, 0, 440, 0, 0 )
+polygon = PoolVector2Array( 720, 0, 720, 528, 0, 528, 0, 0 )
 
 [node name="Stage" type="Sprite" parent="StageContainer"]
-position = Vector2( 360, 720 )
-texture = ExtResource( 6 )
+position = Vector2( 360, 768 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 7 )
 
-[node name="Dancer" parent="StageContainer" instance=ExtResource( 7 )]
+[node name="Dancer" parent="StageContainer" instance=ExtResource( 8 )]
+position = Vector2( 264, 361.6 )
+script = SubResource( 9 )
+DANCER_SPRITE = ExtResource( 9 )
+FRAME_COUNT = 36
 
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
-download_file = "res://level/Level1.tempo"
+[node name="Dancer2" parent="StageContainer" instance=ExtResource( 8 )]
+position = Vector2( 456, 361.6 )
+DANCER_SPRITE = ExtResource( 10 )
+FRAME_COUNT = 33
 
 [node name="Metronome" type="Timer" parent="."]
-editor/display_folded = true
 process_mode = 0
 
 [node name="Beep" type="AudioStreamPlayer" parent="Metronome"]
-stream = ExtResource( 8 )
-volume_db = -20.0
+stream = ExtResource( 11 )
+volume_db = -55.0
 
 [node name="OffsetTimer" type="Timer" parent="."]
 process_mode = 0
 one_shot = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-margin_left = 456.0
-margin_top = 16.0
-margin_right = 707.0
-margin_bottom = 104.0
-custom_fonts/font = SubResource( 8 )
+[node name="Label" type="Label" parent="GUI"]
+anchor_right = 1.0
+margin_left = 452.0
+margin_top = 136.0
+margin_right = -8.0
+margin_bottom = 178.0
+custom_fonts/font = SubResource( 7 )
 text = "0"
 align = 2
 
-[node name="Label2" type="Label" parent="CanvasLayer"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 267.0
-margin_bottom = 104.0
-custom_fonts/font = SubResource( 8 )
+[node name="Label2" type="Label" parent="GUI"]
+margin_left = 8.0
+margin_top = 136.0
+margin_right = 259.0
+margin_bottom = 178.0
+custom_fonts/font = SubResource( 7 )
 text = "120 bpm"
 
-[node name="Label3" type="Label" parent="CanvasLayer"]
-margin_left = 16.0
-margin_top = 88.0
-margin_right = 324.0
-margin_bottom = 176.0
-custom_fonts/font = SubResource( 8 )
+[node name="Label3" type="Label" parent="GUI"]
+margin_left = 8.0
+margin_top = 184.0
+margin_right = 316.0
+margin_bottom = 226.0
+custom_fonts/font = SubResource( 7 )
 text = "1.24 s"
 
-[node name="Label4" type="Label" parent="CanvasLayer"]
-margin_left = 16.0
-margin_top = 160.0
-margin_right = 324.0
-margin_bottom = 248.0
-custom_fonts/font = SubResource( 8 )
+[node name="Label4" type="Label" parent="GUI"]
+margin_left = 8.0
+margin_top = 232.0
+margin_right = 316.0
+margin_bottom = 274.0
+custom_fonts/font = SubResource( 7 )
 text = "0"
+
+[node name="Title" type="Label" parent="GUI"]
+margin_left = 114.0
+margin_top = 16.0
+margin_right = 606.0
+margin_bottom = 69.0
+grow_horizontal = 2
+custom_fonts/font = SubResource( 10 )
+text = "Title"
+align = 1
+
+[node name="Origin" type="Label" parent="GUI"]
+margin_left = 205.0
+margin_top = 72.0
+margin_right = 520.0
+margin_bottom = 105.0
+custom_fonts/font = SubResource( 11 )
+text = "Origin"
+align = 1
+valign = 1
+[connection signal="beat" from="." to="LaneContainer/Lane2" method="spawn"]
+[connection signal="beat" from="." to="LaneContainer/Lane1" method="spawn"]
+[connection signal="beat" from="." to="LaneContainer/Lane4" method="spawn"]
+[connection signal="beat" from="." to="LaneContainer/Lane3" method="spawn"]

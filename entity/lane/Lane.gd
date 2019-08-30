@@ -8,7 +8,8 @@ var queue = [[], [], [], []]
 func _ready():
 	$Hitter.unit_offset = GameManager.HITTER_POS
 
-func spawn(action):
+func spawn(interval):
+	var action = interval[lane_number]
 	if action != GameManager.Action.NONE:
 		var note = note_scene.instance()
 		queue[lane_number].push_back(note)
@@ -38,4 +39,4 @@ func hit(action):
 	else:
 		result = "NO NOTES"
 	print("%s hits with %s -> %s" % [name, action, result])
-	
+
