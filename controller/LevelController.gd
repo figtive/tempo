@@ -1,6 +1,15 @@
 extends Node
 
+signal beat(interval)
+
 export(String, FILE, "*.tempo") var tempo_data
+export(AudioStream) var music
+export(bool) var auto_offset
+export(float) var offset
+
+var time_begin
+var time_delay
+
 var title: String
 var origin: String
 var bpm: float
@@ -9,12 +18,9 @@ var notes: Dictionary
 var note_count = 0
 
 var counter = 0
+var ready = false
 
 func _ready():
-	$HTTPRequest.request("https://gitlab.com/fight-interactive/tempo-public/snippets/1889052/raw")
-	yield($HTTPRequest, "request_completed")
-	print("Downloaded!")
-	
 	var DEBUG_STARTTIME = OS.get_ticks_msec()
 	var file = File.new()
 	file.open(tempo_data, File.READ)
@@ -22,32 +28,61 @@ func _ready():
 	file.close()
 	print("[LevelController] %s loaded successfully in %sms!" % [tempo_data, OS.get_ticks_msec() - DEBUG_STARTTIME])
 	print("[LevelController] %s from %s @ %sbpm in %s sig" % [title, origin, bpm, signature])
-	print("[LevelController] Notes: %s" % notes)
+	
+	$GUI/Title.text = title
+	$GUI/Origin.text = origin
+	$Music.stream = music
 	
 	if not $Metronome.is_connected("timeout", self, "beat"):
 		$Metronome.connect("timeout", self, "beat")
-	$Metronome.wait_time = 60.0 / bpm
-	$Metronome.start()
+	$Metronome.wait_time = 60.0 / (bpm * signature)
+	$GUI/Label2.text = "%s bpm @ %s/4" % [bpm, signature]
 	
-	$LaneContainer/DEBUG_hitline/Tween.interpolate_property($LaneContainer/DEBUG_hitline, "color", Color(1,1,1,1), Color(1,1,1,0.25), 60.0/bpm, Tween.TRANS_QUAD, Tween.EASE_OUT)
-	$LaneContainer/DEBUG_hitline/Tween.start()
+	if auto_offset:
+		GameManager.calc_offset(bpm, offset)
+	else:
+		GameManager.TIME_OFFSET = offset
+	$GUI/Label3.text = "%s s" % GameManager.TIME_OFFSET
+	
+	if not $OffsetTimer.is_connected("timeout", self, "start_music"):
+		$OffsetTimer.connect("timeout", self, "start_music")
+	$OffsetTimer.wait_time = GameManager.TIME_OFFSET
+	$OffsetTimer.one_shot = true
+	
+	counter = GameManager.PRE_BEAT * signature
+	
+	start_beat()
 
+func _process(delta):
+	$GUI/Label.text = str(GameManager.SCORE)
+	
 func beat():
 	$Metronome/Beep.play()
+	$GUI/Label4.text = str(counter - GameManager.PRE_BEAT * signature)	# compensate prebeat for debugging
+	move_dancer()
 	var interval = notes.get(counter)
 	if interval != null:
-		$LaneContainer/Lane1.spawn(interval[0])
-		$LaneContainer/Lane2.spawn(interval[1])
-		$LaneContainer/Lane3.spawn(interval[2])
-		$LaneContainer/Lane4.spawn(interval[3])
-		print("Beat %s :: %s" % [counter, interval])
-	else:
-		print("Beat %s" % counter)
+		spawn_notes(interval)
 	counter += 1
 	if counter > note_count:
-		print("LevelManager] Level done!")
-		$Metronome.stop()
-		$LaneContainer/DEBUG_hitline/Tween.stop_all()
+		print("[LevelManager] Level done!")
+#		$Metronome.stop()
+		
+func spawn_notes(interval):
+	emit_signal("beat", interval)
+
+func move_dancer():
+	if counter % signature % 2 == 0:
+		$StageContainer/Dancer.next()
+		$StageContainer/Dancer2.next()
+
+func start_beat():
+	$OffsetTimer.start()
+
+func start_music():
+	print("MUSIC STARTS")
+	$Music.play()
+	$Metronome.start()
 
 func parse(data: String):
 	var lines = data.split("\n", false)
