@@ -2,6 +2,12 @@ Ondel Ondel - Jakarta
 test
 jkt
 0
-y
 n
-20
+n
+1
+2
+4
+5
+4
+8
+4
