@@ -160,27 +160,5 @@ def get_last_timestamp(file, offset, clocks_per_click):
     return timestamp // clocks_per_click
 
 
-# def write_animation(file, intro, body, outro, end):
-#     file.seek(0)
-#     lines = len(file.readlines())
-#     file.seek(0)
-#     for i in range(lines):
-#         try:
-#             linelol = file.readline()
-#             lol = linelol.split(' ')[0]
-#             timestamp = int(lol)
-#             file.write('here')
-#             if timestamp == intro:
-#                 print('found intro')
-#             elif timestamp == body:
-#                 print('found body')
-#             elif timestamp == outro:
-#                 print('found outro')
-#             elif timestamp == end:
-#                 print('found end')
-#         except ValueError:
-#             pass
-
-
 if __name__ == '__main__':
     main()
