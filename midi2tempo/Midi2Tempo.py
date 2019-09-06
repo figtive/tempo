@@ -125,7 +125,7 @@ def write_notes(notes, file, last_timestamp, skip_empty, write_timestamp, intro_
             elif timestamp == outro_beat:
                 file.write(f' {intro_frames + body_frames}\n')
             elif timestamp == end_beat:
-                file.write(f' {intro_frames + body_frames + outro_frames - 1}\n')
+                file.write(f' {intro_frames + body_frames + outro_frames}\n')
             else:
                 file.write('\n')
         else:
