@@ -11,5 +11,7 @@ func _ready():
 	self.frame = counter
 
 func next(step=counter):
+	if step == null:
+		step = counter
 	counter = (step + 1) % FRAME_COUNT
 	self.frame = step

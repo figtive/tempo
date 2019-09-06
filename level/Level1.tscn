@@ -40,8 +40,10 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 432, 184, 0, 0, 0, 0, 624, 1440 )
 }
 
-[sub_resource type="GDScript" id=9]
+[sub_resource type="GDScript" id=7]
 script/source = "extends Sprite
+
+
 
 export(Texture) var DANCER_SPRITE
 export(int) var FRAME_COUNT
@@ -53,25 +55,25 @@ func _ready():
 	self.hframes = FRAME_COUNT
 	self.frame = counter
 
-func next(step=counter):
+func move(step=counter):
 	counter = (step + 1) % FRAME_COUNT
 	self.frame = step"
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=8]
 size = 42
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 13 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=9]
 size = 52
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 13 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=10]
 size = 32
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
@@ -159,7 +161,7 @@ __meta__ = {
 }
 
 [node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane2"]
-position = Vector2( 288.642, 1113.4 )
+position = Vector2( 288.642, 1113.41 )
 offset = 931.01
 rotate = false
 
@@ -184,7 +186,7 @@ __meta__ = {
 }
 
 [node name="Hitter" type="PathFollow2D" parent="LaneContainer/Lane3"]
-position = Vector2( 431.358, 1113.4 )
+position = Vector2( 431.358, 1113.41 )
 offset = 931.01
 rotate = false
 
@@ -240,7 +242,7 @@ texture = ExtResource( 8 )
 
 [node name="Dancer" parent="StageContainer" instance=ExtResource( 9 )]
 position = Vector2( 264, 385.6 )
-script = SubResource( 9 )
+script = SubResource( 7 )
 DANCER_SPRITE = ExtResource( 10 )
 FRAME_COUNT = 36
 
@@ -270,7 +272,7 @@ margin_left = 452.0
 margin_top = 136.0
 margin_right = -8.0
 margin_bottom = 178.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 text = "0"
 align = 2
 
@@ -279,7 +281,7 @@ margin_left = 8.0
 margin_top = 136.0
 margin_right = 259.0
 margin_bottom = 178.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 text = "120 bpm"
 
 [node name="Label3" type="Label" parent="GUI"]
@@ -287,7 +289,7 @@ margin_left = 8.0
 margin_top = 184.0
 margin_right = 316.0
 margin_bottom = 226.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 text = "1.24 s"
 
 [node name="Label4" type="Label" parent="GUI"]
@@ -295,7 +297,7 @@ margin_left = 8.0
 margin_top = 232.0
 margin_right = 316.0
 margin_bottom = 274.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 text = "0"
 
 [node name="Title" type="Label" parent="GUI"]
@@ -304,7 +306,7 @@ margin_top = 16.0
 margin_right = 606.0
 margin_bottom = 69.0
 grow_horizontal = 2
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 9 )
 text = "Title"
 align = 1
 
@@ -313,11 +315,12 @@ margin_left = 205.0
 margin_top = 72.0
 margin_right = 520.0
 margin_bottom = 105.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 10 )
 text = "Origin"
 align = 1
 valign = 1
-[connection signal="beat" from="." to="LaneContainer/Lane2" method="spawn"]
-[connection signal="beat" from="." to="LaneContainer/Lane1" method="spawn"]
 [connection signal="beat" from="." to="LaneContainer/Lane4" method="spawn"]
+[connection signal="beat" from="." to="LaneContainer/Lane2" method="spawn"]
 [connection signal="beat" from="." to="LaneContainer/Lane3" method="spawn"]
+[connection signal="beat" from="." to="LaneContainer/Lane1" method="spawn"]
+[connection signal="move" from="." to="StageContainer/Dancer" method="move"]
