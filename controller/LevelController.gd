@@ -1,11 +1,14 @@
 extends Node
 
 signal beat(interval)
+signal move(frame)
 
 export(String, FILE, "*.tempo") var tempo_data
 export(AudioStream) var music
 export(bool) var auto_offset
 export(float) var offset
+
+export(bool) var DEBUG_TEMPOV2
 
 var time_begin
 var time_delay
@@ -15,10 +18,13 @@ var origin: String
 var bpm: float
 var signature: int
 var notes: Dictionary
+var current_bound = [0, 1]
+var section_bound = [0]
 var note_count = 0
+var section = GameManager.Section.STOP
 
-var counter = 0
-var ready = false
+var beat_counter = 0
+var frame_counter = 0
 
 func _ready():
 	var DEBUG_STARTTIME = OS.get_ticks_msec()
@@ -49,32 +55,56 @@ func _ready():
 	$OffsetTimer.wait_time = GameManager.TIME_OFFSET
 	$OffsetTimer.one_shot = true
 	
-	counter = GameManager.PRE_BEAT * signature
-	
+	beat_counter = GameManager.PRE_BEAT * signature
 	start_beat()
 
 func _process(delta):
 	$GUI/Label.text = str(GameManager.SCORE)
-	
+
 func beat():
 	$Metronome/Beep.play()
-	$GUI/Label4.text = str(counter - GameManager.PRE_BEAT * signature)	# compensate prebeat for debugging
+	$GUI/Label4.text = str(beat_counter - GameManager.PRE_BEAT * signature)	# compensate prebeat for debugging
 	move_dancer()
-	var interval = notes.get(counter)
+	var interval = notes.get(beat_counter)
 	if interval != null:
 		spawn_notes(interval)
-	counter += 1
-	if counter > note_count:
+	beat_counter += 1
+	if beat_counter > note_count:
 		print("[LevelManager] Level done!")
 #		$Metronome.stop()
-		
+
 func spawn_notes(interval):
 	emit_signal("beat", interval)
 
 func move_dancer():
-	if counter % signature % 2 == 0:
-		$StageContainer/Dancer.next()
-		$StageContainer/Dancer2.next()
+	if beat_counter % signature == 0:
+		if DEBUG_TEMPOV2:
+			var frame = notes.get(beat_counter)[5]
+			if frame == null:
+				emit_signal("move", frame_counter)
+				frame_counter = ((frame_counter + 1) % current_bound[1]) + current_bound[0] 
+			else:
+				frame_counter = frame
+				match section:
+					GameManager.Section.Stop:
+						section = GameManager.Section.Intro
+						current_bound[0] = section_bound[0]
+						current_bound[1] = section_bound[1]
+					GameManager.Section.Intro:
+						section = GameManager.Section.Body
+						current_bound[0] = section_bound[1]
+						current_bound[1] = section_bound[2]
+					GameManager.Section.Body:
+						section = GameManager.Section.Outro
+						current_bound[0] = section_bound[2]
+						current_bound[1] = section_bound[3]
+					GameManager.Section.Outro:
+						section = GameManager.Section.Stop
+						current_bound[0] = section_bound[3]
+						current_bound[1] = section_bound[3] + 1
+				emit_signal("move", frame_counter)
+		else:
+			emit_signal("move")
 
 func start_beat():
 	$OffsetTimer.start()
@@ -93,9 +123,12 @@ func parse(data: String):
 	for i in range(4, lines.size()):
 		note_count += 1
 		var tokens = lines[i].split(" ", false)
-		var beat = [GameManager.Action.NONE, GameManager.Action.NONE, GameManager.Action.NONE, GameManager.Action.NONE]
+		var beat = [GameManager.Action.NONE, GameManager.Action.NONE, GameManager.Action.NONE, GameManager.Action.NONE, null]
+		if tokens.size() > 5:
+			beat[4] = tokens[5] as int
+			section_bound.append(beat[4])
 		for i in range(0, 5):
-			if i != 0:	
+			if i != 0:
 				match tokens[i].to_upper():
 					"T":
 						beat[i-1] = GameManager.Action.TAP
@@ -109,3 +142,5 @@ func parse(data: String):
 						beat[i-1] = GameManager.Action.SWIPE_RIGHT
 			else:
 				notes[tokens[i] as int] = beat
+			
+			
