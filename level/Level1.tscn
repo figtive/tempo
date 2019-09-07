@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://controller/LevelController.gd" type="Script" id=1]
 [ext_resource path="res://music/Ondel Ondel - Jakarta.wav" type="AudioStream" id=2]
@@ -12,7 +12,12 @@
 [ext_resource path="res://entity/dancer/sprites/Dancer_Man_OndelOndel (2).png" type="Texture" id=10]
 [ext_resource path="res://entity/dancer/sprites/Dancer_Woman_OndelOndel (2).png" type="Texture" id=11]
 [ext_resource path="res://sound/beep.wav" type="AudioStream" id=12]
-[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://level/GUIController.gd" type="Script" id=13]
+[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://level/gui/bar_0.png" type="Texture" id=15]
+[ext_resource path="res://level/gui/Bar.gd" type="Script" id=16]
+[ext_resource path="res://level/gui/bar_2.png" type="Texture" id=17]
+[ext_resource path="res://level/gui/bar_1.png" type="Texture" id=18]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -40,44 +45,31 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 432, 184, 0, 0, 0, 0, 624, 1440 )
 }
 
-[sub_resource type="GDScript" id=7]
-script/source = "extends Sprite
-
-
-
-export(Texture) var DANCER_SPRITE
-export(int) var FRAME_COUNT
-
-var counter = 0
-
-func _ready():
-	self.texture = DANCER_SPRITE
-	self.hframes = FRAME_COUNT
-	self.frame = counter
-
-func move(step=counter):
-	counter = (step + 1) % FRAME_COUNT
-	self.frame = step"
-
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=7]
 size = 42
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 13 )
+font_data = ExtResource( 14 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=8]
 size = 52
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 13 )
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 32
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 14 )
 
 [sub_resource type="DynamicFont" id=10]
-size = 32
-outline_size = 4
+size = 46
+outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 13 )
+font_data = ExtResource( 14 )
 
 [node name="Level1" type="Node"]
 script = ExtResource( 1 )
@@ -89,6 +81,7 @@ tempo_data = "res://music/Ondel Ondel - Jakarta.tempo"
 music = ExtResource( 2 )
 auto_offset = true
 offset = -0.25
+end_beat_count = 500
 
 [node name="DEBUG_align" type="Polygon2D" parent="."]
 visible = false
@@ -242,7 +235,6 @@ texture = ExtResource( 8 )
 
 [node name="Dancer" parent="StageContainer" instance=ExtResource( 9 )]
 position = Vector2( 264, 385.6 )
-script = SubResource( 7 )
 DANCER_SPRITE = ExtResource( 10 )
 FRAME_COUNT = 36
 
@@ -265,39 +257,45 @@ one_shot = true
 [node name="Music" type="AudioStreamPlayer" parent="."]
 
 [node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource( 13 )
 
-[node name="Label" type="Label" parent="GUI"]
-anchor_right = 1.0
-margin_left = 452.0
-margin_top = 136.0
-margin_right = -8.0
-margin_bottom = 178.0
-custom_fonts/font = SubResource( 8 )
-text = "0"
-align = 2
+[node name="DEBUG" type="Control" parent="GUI"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Label2" type="Label" parent="GUI"]
-margin_left = 8.0
-margin_top = 136.0
-margin_right = 259.0
-margin_bottom = 178.0
-custom_fonts/font = SubResource( 8 )
+[node name="Label2" type="Label" parent="GUI/DEBUG"]
+margin_left = 58.0
+margin_top = 111.0
+margin_right = 309.0
+margin_bottom = 153.0
+custom_fonts/font = SubResource( 7 )
 text = "120 bpm"
 
-[node name="Label3" type="Label" parent="GUI"]
-margin_left = 8.0
-margin_top = 184.0
-margin_right = 316.0
-margin_bottom = 226.0
-custom_fonts/font = SubResource( 8 )
+[node name="Label3" type="Label" parent="GUI/DEBUG"]
+margin_left = 58.0
+margin_top = 153.0
+margin_right = 366.0
+margin_bottom = 195.0
+custom_fonts/font = SubResource( 7 )
 text = "1.24 s"
 
-[node name="Label4" type="Label" parent="GUI"]
-margin_left = 8.0
-margin_top = 232.0
-margin_right = 316.0
-margin_bottom = 274.0
-custom_fonts/font = SubResource( 8 )
+[node name="Label4" type="Label" parent="GUI/DEBUG"]
+margin_left = 58.0
+margin_top = 195.0
+margin_right = 366.0
+margin_bottom = 237.0
+custom_fonts/font = SubResource( 7 )
+text = "0"
+
+[node name="Label" type="Label" parent="GUI/DEBUG"]
+margin_left = 58.0
+margin_top = 237.0
+margin_right = 366.0
+margin_bottom = 279.0
+custom_fonts/font = SubResource( 7 )
 text = "0"
 
 [node name="Title" type="Label" parent="GUI"]
@@ -306,7 +304,7 @@ margin_top = 16.0
 margin_right = 606.0
 margin_bottom = 69.0
 grow_horizontal = 2
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
 text = "Title"
 align = 1
 
@@ -315,12 +313,88 @@ margin_left = 205.0
 margin_top = 72.0
 margin_right = 520.0
 margin_bottom = 105.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 9 )
 text = "Origin"
 align = 1
 valign = 1
+
+[node name="MultiplierBar" type="TextureRect" parent="GUI"]
+margin_top = 71.0
+margin_right = 90.0
+margin_bottom = 641.0
+rect_scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 15 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Fill" type="TextureRect" parent="GUI/MultiplierBar"]
+texture = ExtResource( 17 )
+
+[node name="Cover" type="Control" parent="GUI/MultiplierBar"]
+editor/display_folded = true
+margin_right = 90.0
+margin_bottom = 570.0
+rect_clip_content = true
+
+[node name="CoverFill" type="TextureRect" parent="GUI/MultiplierBar/Cover"]
+texture = ExtResource( 15 )
+
+[node name="ProgressBar" type="TextureRect" parent="GUI"]
+margin_left = 666.0
+margin_top = 71.0
+margin_right = 756.0
+margin_bottom = 641.0
+grow_horizontal = 0
+rect_scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 15 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Fill" type="TextureRect" parent="GUI/ProgressBar"]
+margin_right = 90.0
+margin_bottom = 570.0
+texture = ExtResource( 18 )
+
+[node name="Cover" type="Control" parent="GUI/ProgressBar"]
+margin_right = 90.0
+margin_bottom = 570.0
+rect_clip_content = true
+
+[node name="CoverFill" type="TextureRect" parent="GUI/ProgressBar/Cover"]
+texture = ExtResource( 15 )
+
+[node name="Multiplier" type="Label" parent="GUI"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 104.0
+margin_bottom = 53.0
+custom_fonts/font = SubResource( 10 )
+text = "x1.0"
+
+[node name="Score" type="Label" parent="GUI"]
+margin_left = 472.0
+margin_top = 16.0
+margin_right = 704.0
+margin_bottom = 63.0
+custom_fonts/font = SubResource( 10 )
+text = "0"
+align = 2
+
+[node name="Streak" type="Label" parent="GUI"]
+margin_left = 608.0
+margin_top = 80.0
+margin_right = 664.0
+margin_bottom = 127.0
+custom_fonts/font = SubResource( 10 )
+text = "0"
+align = 2
 [connection signal="beat" from="." to="LaneContainer/Lane4" method="spawn"]
-[connection signal="beat" from="." to="LaneContainer/Lane2" method="spawn"]
 [connection signal="beat" from="." to="LaneContainer/Lane3" method="spawn"]
 [connection signal="beat" from="." to="LaneContainer/Lane1" method="spawn"]
+[connection signal="beat" from="." to="LaneContainer/Lane2" method="spawn"]
 [connection signal="move" from="." to="StageContainer/Dancer" method="move"]
+[connection signal="move" from="." to="StageContainer/Dancer2" method="move"]

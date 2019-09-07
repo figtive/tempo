@@ -13,6 +13,7 @@ const GROW_SIZE = Vector2(1.05, 1.05)
 var TYPE
 
 var hittable = false
+var attempted = false
 
 func _ready():
 	$Tween.interpolate_property(self, "unit_offset",
@@ -52,7 +53,8 @@ func hit(action):
 			return "WRONG"
 
 func _physics_process(delta):
-	if unit_offset >= GameManager.HITTER_TOLERANCE[0] and unit_offset < GameManager.HITTER_TOLERANCE[1]:
+	if unit_offset >= GameManager.HITTER_TOLERANCE[0] and unit_offset < GameManager.HITTER_TOLERANCE[1] and not attempted:
+		attempted = true
 		hittable = true
 		$Sprite.modulate = Color(1,1,0)
 	if unit_offset >= GameManager.HITTER_TOLERANCE[1] and hittable:
