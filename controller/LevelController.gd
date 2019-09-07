@@ -62,9 +62,6 @@ func _ready():
 	
 	start_beat()
 
-func _process(delta):
-	$GUI/DEBUG/Label.text = str(GameManager.SCORE)
-
 func beat():
 	$Metronome/Beep.play()
 	$GUI/DEBUG/Label4.text = str(beat_counter)

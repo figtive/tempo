@@ -9,8 +9,8 @@
 [ext_resource path="res://entity/lane/sprites/sprite_2.png" type="Texture" id=7]
 [ext_resource path="res://entity/lane/sprites/sprite_0.png" type="Texture" id=8]
 [ext_resource path="res://entity/dancer/Dancer.tscn" type="PackedScene" id=9]
-[ext_resource path="res://entity/dancer/sprites/Dancer_Man_OndelOndel (2).png" type="Texture" id=10]
-[ext_resource path="res://entity/dancer/sprites/Dancer_Woman_OndelOndel (2).png" type="Texture" id=11]
+[ext_resource path="res://entity/dancer/sprites/Dancer_Man_OndelOndel.png" type="Texture" id=10]
+[ext_resource path="res://entity/dancer/sprites/Dancer_Woman_OndelOndel.png" type="Texture" id=11]
 [ext_resource path="res://sound/beep.wav" type="AudioStream" id=12]
 [ext_resource path="res://level/GUIController.gd" type="Script" id=13]
 [ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=14]
@@ -290,14 +290,6 @@ margin_bottom = 237.0
 custom_fonts/font = SubResource( 7 )
 text = "0"
 
-[node name="Label" type="Label" parent="GUI/DEBUG"]
-margin_left = 58.0
-margin_top = 237.0
-margin_right = 366.0
-margin_bottom = 279.0
-custom_fonts/font = SubResource( 7 )
-text = "0"
-
 [node name="Title" type="Label" parent="GUI"]
 margin_left = 114.0
 margin_top = 16.0
@@ -341,6 +333,8 @@ rect_clip_content = true
 [node name="CoverFill" type="TextureRect" parent="GUI/MultiplierBar/Cover"]
 texture = ExtResource( 15 )
 
+[node name="Tween" type="Tween" parent="GUI/MultiplierBar"]
+
 [node name="ProgressBar" type="TextureRect" parent="GUI"]
 margin_left = 666.0
 margin_top = 71.0
@@ -367,6 +361,8 @@ rect_clip_content = true
 [node name="CoverFill" type="TextureRect" parent="GUI/ProgressBar/Cover"]
 texture = ExtResource( 15 )
 
+[node name="Tween" type="Tween" parent="GUI/ProgressBar"]
+
 [node name="Multiplier" type="Label" parent="GUI"]
 margin_left = 16.0
 margin_top = 16.0
@@ -392,9 +388,9 @@ margin_bottom = 127.0
 custom_fonts/font = SubResource( 10 )
 text = "0"
 align = 2
-[connection signal="beat" from="." to="LaneContainer/Lane4" method="spawn"]
 [connection signal="beat" from="." to="LaneContainer/Lane3" method="spawn"]
-[connection signal="beat" from="." to="LaneContainer/Lane1" method="spawn"]
+[connection signal="beat" from="." to="LaneContainer/Lane4" method="spawn"]
 [connection signal="beat" from="." to="LaneContainer/Lane2" method="spawn"]
+[connection signal="beat" from="." to="LaneContainer/Lane1" method="spawn"]
 [connection signal="move" from="." to="StageContainer/Dancer" method="move"]
 [connection signal="move" from="." to="StageContainer/Dancer2" method="move"]
