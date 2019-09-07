@@ -15,14 +15,30 @@ var BASE_MULTIPLIER = 0.25
 var BASE_MULT_PERCENT = 0.2
 
 var MULTIPLIER = 1.0
-var MULT_PERCENT = 0
+var MULT_PERCENT = 0.0
 var SCORE = 0
 var STREAK = 0
 
 var current_level: LevelController
 
-func _ready():
-	pass
+const LEVELS = [
+	null,									# INSERT TUTORIAL LEVEL HERE
+	preload("res://level/Level1.tscn")
+]
+
+func start_level(level):
+	if LEVELS.size() <= level or LEVELS[level] == null:
+		print("[GameManager] Level%s not found!" % level)
+		return
+	print("[GameManager] Loading Level%s ..." % level)
+	get_tree().change_scene_to(LEVELS[level])
+	reset_level()
+
+func reset_level():
+	SCORE = 0
+	STREAK = 0
+	MULTIPLIER = 1.0
+	MULT_PERCENT = 0.0
 	
 func hit(hits):
 	if hits:
