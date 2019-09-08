@@ -30,6 +30,7 @@ var frame_counter = 0
 onready var gui: GUIController = $GUI
 
 func _ready():
+	get_tree().set_pause(false)
 	GameManager.current_level = self
 	var DEBUG_STARTTIME = OS.get_ticks_msec()
 	var file = File.new()
@@ -68,6 +69,10 @@ func pause(pause=true):
 	else:
 		gui.change_display("game")
 		get_tree().set_pause(false)
+
+func restart():
+	get_tree().set_pause(false)
+	GameManager.start_level(GameManager.current_level_idx)
 
 func beat():
 	$Metronome/Beep.play()

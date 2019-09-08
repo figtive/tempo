@@ -20,6 +20,7 @@ var SCORE = 0
 var STREAK = 0
 
 var current_level
+var current_level_idx = -1
 
 const MAINMENU_SCENE = preload("res://level/MainMenu.tscn")
 const LEVELS = [
@@ -30,6 +31,7 @@ const LEVELS = [
 
 func return_menu():
 	reset_level()
+	current_level_idx = -1
 	print("[GameManager] Returning to main menu ...")
 	get_tree().change_scene_to(MAINMENU_SCENE)
 
@@ -37,6 +39,7 @@ func start_level(level):
 	if LEVELS.size() <= level or LEVELS[level] == null:
 		print("[GameManager] Level%s not found!" % level)
 		return
+	current_level_idx = level
 	print("[GameManager] Loading Level%s ..." % level)
 	get_tree().change_scene_to(LEVELS[level])
 	reset_level()
