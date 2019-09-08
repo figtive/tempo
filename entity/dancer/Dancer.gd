@@ -10,8 +10,6 @@ func _ready():
 	self.hframes = FRAME_COUNT
 	self.frame = counter
 
-func next(step=counter):
-	if step == null:
-		step = counter
+func move(step=counter):
 	counter = (step + 1) % FRAME_COUNT
 	self.frame = step

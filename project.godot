@@ -9,19 +9,31 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "CanvasLayer",
+"class": "GUIController",
+"language": "GDScript",
+"path": "res://level/GUIController.gd"
+}, {
+"base": "Node",
+"class": "LevelController",
+"language": "GDScript",
+"path": "res://controller/LevelController.gd"
+}, {
 "base": "PathFollow2D",
 "class": "Note",
 "language": "GDScript",
 "path": "res://entity/note/Note.gd"
 } ]
 _global_script_class_icons={
+"GUIController": "",
+"LevelController": "",
 "Note": ""
 }
 
 [application]
 
 config/name="Tempo"
-run/main_scene="res://level/Level1.tscn"
+run/main_scene="res://level/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
