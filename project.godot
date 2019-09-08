@@ -12,12 +12,7 @@ _global_script_classes=[ {
 "base": "CanvasLayer",
 "class": "GUIController",
 "language": "GDScript",
-"path": "res://level/GUIController.gd"
-}, {
-"base": "Node",
-"class": "LevelController",
-"language": "GDScript",
-"path": "res://controller/LevelController.gd"
+"path": "res://level/gui/GUIController.gd"
 }, {
 "base": "PathFollow2D",
 "class": "Note",
@@ -26,7 +21,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "GUIController": "",
-"LevelController": "",
 "Note": ""
 }
 
@@ -73,10 +67,17 @@ texture={
 "svg/scale": 1.0
 }
 
+[input]
+
+back={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":92,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
-pointing/emulate_mouse_from_touch=false
 
 [rendering]
 

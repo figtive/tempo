@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sprite_1.png-e4699a897cfd876e134cc5ac0e0ad330.stex"
+path="res://.import/Dancer_Man_TorTor.png-effb31dbcebd1073e7940d99576fbdd8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entity/lane/sprites/sprite_1.png"
-dest_files=[ "res://.import/sprite_1.png-e4699a897cfd876e134cc5ac0e0ad330.stex" ]
+source_file="res://entity/dancer/sprites/Level2/Dancer_Man_TorTor.png"
+dest_files=[ "res://.import/Dancer_Man_TorTor.png-effb31dbcebd1073e7940d99576fbdd8.stex" ]
 
 [params]
 

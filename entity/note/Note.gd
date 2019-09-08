@@ -9,7 +9,7 @@ export(Texture) var texture_tap
 
 const START_POS = 0		# DO NOT CHANGE!
 const END_POS = 1		# DO NOT CHANGE!
-const GROW_SIZE = Vector2(1.05, 1.05)
+const GROW_SIZE = Vector2(1, 1)
 var TYPE
 
 var hittable = false

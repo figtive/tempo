@@ -1,17 +1,18 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://level/LevelBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://music/Ondel Ondel - Jakarta.wav" type="AudioStream" id=2]
-[ext_resource path="res://entity/lane/sprites/Level1/sprite_1.png" type="Texture" id=3]
-[ext_resource path="res://entity/lane/sprites/Level1/sprite_2.png" type="Texture" id=4]
-[ext_resource path="res://entity/lane/sprites/Level1/sprite_0.png" type="Texture" id=5]
-[ext_resource path="res://entity/dancer/sprites/Level1/Dancer_Man_OndelOndel.png" type="Texture" id=6]
-[ext_resource path="res://entity/dancer/sprites/Level1/Dancer_Woman_OndelOndel.png" type="Texture" id=7]
+[ext_resource path="res://music/Sinanggar Tullo - Sumatra Utara.wav" type="AudioStream" id=2]
+[ext_resource path="res://entity/lane/sprites/Level2/sprite_2.png" type="Texture" id=3]
+[ext_resource path="res://entity/lane/sprites/Level2/sprite_0.png" type="Texture" id=4]
+[ext_resource path="res://entity/lane/sprites/Level2/sprite_1.png" type="Texture" id=5]
+[ext_resource path="res://entity/dancer/sprites/Level2/Dancer_Man_TorTor.png" type="Texture" id=6]
+[ext_resource path="res://entity/dancer/sprites/Level2/Dancer_Woman_TorTor.png" type="Texture" id=7]
 
 [node name="Level" instance=ExtResource( 1 )]
-tempo_data = "res://music/Ondel Ondel - Jakarta.tempo"
+tempo_data = "res://music/Sinanggar Tullo - Sumatra Utara.tempo"
 music = ExtResource( 2 )
-end_beat_count = 500
+end_beat_count = 700
+DEBUG_TEMPO_V2 = true
 
 [node name="Sprite" parent="LaneContainer" index="0"]
 texture = ExtResource( 3 )
@@ -24,13 +25,10 @@ texture = ExtResource( 5 )
 
 [node name="Dancer" parent="StageContainer" index="2"]
 DANCER_SPRITE = ExtResource( 6 )
-FRAME_COUNT = 36
+FRAME_COUNT = 33
 
 [node name="Dancer2" parent="StageContainer" index="3"]
 DANCER_SPRITE = ExtResource( 7 )
 FRAME_COUNT = 33
-
-[node name="GUI" parent="." index="6"]
-editor/display_folded = true
 [connection signal="move" from="." to="StageContainer/Dancer" method="move"]
 [connection signal="move" from="." to="StageContainer/Dancer2" method="move"]

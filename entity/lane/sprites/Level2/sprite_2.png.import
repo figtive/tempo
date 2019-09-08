@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Dancer_Woman_OndelOndel.png-33fd14031e1047573f05a41eb670c96c.stex"
+path="res://.import/sprite_2.png-53661f0551dab6415c220b0562b972b4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entity/dancer/sprites/Dancer_Woman_OndelOndel.png"
-dest_files=[ "res://.import/Dancer_Woman_OndelOndel.png-33fd14031e1047573f05a41eb670c96c.stex" ]
+source_file="res://entity/lane/sprites/Level2/sprite_2.png"
+dest_files=[ "res://.import/sprite_2.png-53661f0551dab6415c220b0562b972b4.stex" ]
 
 [params]
 
