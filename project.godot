@@ -28,6 +28,8 @@ _global_script_class_icons={
 
 config/name="Tempo"
 run/main_scene="res://level/MainMenu.tscn"
+boot_splash/image="res://logo/white_acc_trans.png"
+boot_splash/fullsize=false
 config/icon="res://icon.png"
 
 [autoload]
@@ -81,4 +83,6 @@ pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=0
 environment/default_environment="res://default_env.tres"

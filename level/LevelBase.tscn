@@ -1,17 +1,23 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://controller/LevelController.gd" type="Script" id=1]
-[ext_resource path="res://entity/lane/Lane.gd" type="Script" id=2]
-[ext_resource path="res://entity/note/sprites/note_5.png" type="Texture" id=3]
-[ext_resource path="res://entity/lane/HitterButton.gd" type="Script" id=4]
-[ext_resource path="res://entity/dancer/Dancer.tscn" type="PackedScene" id=5]
-[ext_resource path="res://sound/beep.wav" type="AudioStream" id=6]
-[ext_resource path="res://level/gui/GUIController.gd" type="Script" id=7]
-[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://level/gui/bar_0.png" type="Texture" id=9]
-[ext_resource path="res://level/gui/Bar.gd" type="Script" id=10]
-[ext_resource path="res://level/gui/bar_2.png" type="Texture" id=11]
-[ext_resource path="res://level/gui/bar_1.png" type="Texture" id=12]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://entity/lane/sprites/Level2/sprite_1.png" type="Texture" id=3]
+[ext_resource path="res://entity/lane/Lane.gd" type="Script" id=4]
+[ext_resource path="res://entity/note/sprites/note_5.png" type="Texture" id=5]
+[ext_resource path="res://entity/lane/HitterButton.gd" type="Script" id=6]
+[ext_resource path="res://entity/note/sprites/note_6.png" type="Texture" id=7]
+[ext_resource path="res://entity/lane/anim/Hit.tres" type="Animation" id=8]
+[ext_resource path="res://entity/lane/anim/Pressed.tres" type="Animation" id=9]
+[ext_resource path="res://entity/lane/sprites/Level2/sprite_2.png" type="Texture" id=10]
+[ext_resource path="res://entity/dancer/Dancer.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sound/beep.wav" type="AudioStream" id=12]
+[ext_resource path="res://level/gui/GUIController.gd" type="Script" id=13]
+[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://level/gui/bar_0.png" type="Texture" id=15]
+[ext_resource path="res://level/gui/Bar.gd" type="Script" id=16]
+[ext_resource path="res://level/gui/bar_2.png" type="Texture" id=17]
+[ext_resource path="res://level/gui/bar_1.png" type="Texture" id=18]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -21,60 +27,57 @@ _data = {
 [sub_resource type="CircleShape2D" id=2]
 radius = 48.0
 
-[sub_resource type="Curve2D" id=3]
+[sub_resource type="Curve2D" id=6]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 336, 184, 0, 0, 0, 0, 272, 1440 )
 }
 
-[sub_resource type="CircleShape2D" id=4]
-radius = 48.0
-
-[sub_resource type="Curve2D" id=5]
+[sub_resource type="Curve2D" id=8]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 384, 184, 0, 0, 0, 0, 448, 1440 )
 }
 
-[sub_resource type="Curve2D" id=6]
+[sub_resource type="Curve2D" id=9]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 432, 184, 0, 0, 0, 0, 624, 1440 )
 }
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=10]
 size = 42
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 8 )
+font_data = ExtResource( 14 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=11]
 size = 32
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 8 )
+font_data = ExtResource( 14 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=12]
 size = 46
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 8 )
+font_data = ExtResource( 14 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=13]
 size = 72
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 8 )
+font_data = ExtResource( 14 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=14]
 size = 48
-font_data = ExtResource( 8 )
+font_data = ExtResource( 14 )
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=15]
 size = 42
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
-font_data = ExtResource( 8 )
+font_data = ExtResource( 14 )
 
 [node name="Level" type="Node"]
 script = ExtResource( 1 )
@@ -99,14 +102,21 @@ margin_right = 360.0
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="Audience" type="Node2D" parent="LaneContainer"]
+editor/display_folded = true
+
+[node name="Sprite" type="Sprite" parent="LaneContainer/Audience"]
+texture = ExtResource( 2 )
+
 [node name="Sprite" type="Sprite" parent="LaneContainer"]
 position = Vector2( 360, 560 )
 scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 3 )
 region_rect = Rect2( 301, 216, 116, 140 )
 
 [node name="Lane1" type="Path2D" parent="LaneContainer"]
 curve = SubResource( 1 )
-script = ExtResource( 2 )
+script = ExtResource( 4 )
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane1"]
 visible = false
@@ -125,14 +135,28 @@ rotate = false
 [node name="Button" type="TouchScreenButton" parent="LaneContainer/Lane1/Hitter"]
 position = Vector2( -48, -48 )
 scale = Vector2( 0.75, 0.75 )
-z_index = 1000
-normal = ExtResource( 3 )
+z_index = 500
+normal = ExtResource( 5 )
 shape = SubResource( 2 )
-script = ExtResource( 4 )
+script = ExtResource( 6 )
+
+[node name="Halo" type="Sprite" parent="LaneContainer/Lane1/Hitter/Button"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 64, 64 )
+z_index = 1000
+texture = ExtResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaneContainer/Lane1/Hitter/Button/Halo"]
+playback_speed = 6.0
+anims/Hit = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaneContainer/Lane1/Hitter/Button"]
+playback_speed = 6.0
+anims/Pressed = ExtResource( 9 )
 
 [node name="Lane2" type="Path2D" parent="LaneContainer"]
-curve = SubResource( 3 )
-script = ExtResource( 2 )
+curve = SubResource( 6 )
+script = ExtResource( 4 )
 lane_number = 1
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane2"]
@@ -152,14 +176,28 @@ rotate = false
 [node name="Button" type="TouchScreenButton" parent="LaneContainer/Lane2/Hitter"]
 position = Vector2( -48, -48 )
 scale = Vector2( 0.75, 0.75 )
+z_index = 500
+normal = ExtResource( 5 )
+shape = SubResource( 2 )
+script = ExtResource( 6 )
+
+[node name="Halo" type="Sprite" parent="LaneContainer/Lane2/Hitter/Button"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 64, 64 )
 z_index = 1000
-normal = ExtResource( 3 )
-shape = SubResource( 4 )
-script = ExtResource( 4 )
+texture = ExtResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaneContainer/Lane2/Hitter/Button/Halo"]
+playback_speed = 6.0
+anims/Hit = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaneContainer/Lane2/Hitter/Button"]
+playback_speed = 6.0
+anims/Pressed = ExtResource( 9 )
 
 [node name="Lane3" type="Path2D" parent="LaneContainer"]
-curve = SubResource( 5 )
-script = ExtResource( 2 )
+curve = SubResource( 8 )
+script = ExtResource( 4 )
 lane_number = 2
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane3"]
@@ -179,14 +217,28 @@ rotate = false
 [node name="Button" type="TouchScreenButton" parent="LaneContainer/Lane3/Hitter"]
 position = Vector2( -48, -48 )
 scale = Vector2( 0.75, 0.75 )
+z_index = 500
+normal = ExtResource( 5 )
+shape = SubResource( 2 )
+script = ExtResource( 6 )
+
+[node name="Halo" type="Sprite" parent="LaneContainer/Lane3/Hitter/Button"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 64, 64 )
 z_index = 1000
-normal = ExtResource( 3 )
-shape = SubResource( 4 )
-script = ExtResource( 4 )
+texture = ExtResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaneContainer/Lane3/Hitter/Button/Halo"]
+playback_speed = 6.0
+anims/Hit = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaneContainer/Lane3/Hitter/Button"]
+playback_speed = 6.0
+anims/Pressed = ExtResource( 9 )
 
 [node name="Lane4" type="Path2D" parent="LaneContainer"]
-curve = SubResource( 6 )
-script = ExtResource( 2 )
+curve = SubResource( 9 )
+script = ExtResource( 4 )
 lane_number = 3
 
 [node name="Line2D" type="Line2D" parent="LaneContainer/Lane4"]
@@ -206,10 +258,24 @@ rotate = false
 [node name="Button" type="TouchScreenButton" parent="LaneContainer/Lane4/Hitter"]
 position = Vector2( -48, -48 )
 scale = Vector2( 0.75, 0.75 )
+z_index = 500
+normal = ExtResource( 5 )
+shape = SubResource( 2 )
+script = ExtResource( 6 )
+
+[node name="Halo" type="Sprite" parent="LaneContainer/Lane4/Hitter/Button"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 64, 64 )
 z_index = 1000
-normal = ExtResource( 3 )
-shape = SubResource( 4 )
-script = ExtResource( 4 )
+texture = ExtResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaneContainer/Lane4/Hitter/Button/Halo"]
+playback_speed = 6.0
+anims/Hit = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaneContainer/Lane4/Hitter/Button"]
+playback_speed = 6.0
+anims/Pressed = ExtResource( 9 )
 
 [node name="StageContainer" type="VBoxContainer" parent="."]
 margin_right = 720.0
@@ -218,6 +284,7 @@ margin_bottom = 1280.0
 [node name="Background" type="Sprite" parent="StageContainer"]
 position = Vector2( 360, 720 )
 scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 10 )
 
 [node name="MockBackground" type="Polygon2D" parent="StageContainer/Background"]
 visible = false
@@ -228,10 +295,12 @@ polygon = PoolVector2Array( 480, -960, 480, -117.333, -480, -117.333, -480, -960
 position = Vector2( 360, 808 )
 scale = Vector2( 0.75, 0.75 )
 
-[node name="Dancer" parent="StageContainer" instance=ExtResource( 5 )]
+[node name="Dancer" parent="StageContainer" instance=ExtResource( 11 )]
+visible = false
 position = Vector2( 264, 385.6 )
 
-[node name="Dancer2" parent="StageContainer" instance=ExtResource( 5 )]
+[node name="Dancer2" parent="StageContainer" instance=ExtResource( 11 )]
+visible = false
 position = Vector2( 456, 385.6 )
 
 [node name="Metronome" type="Timer" parent="."]
@@ -239,7 +308,7 @@ editor/display_folded = true
 process_mode = 0
 
 [node name="Beep" type="AudioStreamPlayer" parent="Metronome"]
-stream = ExtResource( 6 )
+stream = ExtResource( 12 )
 volume_db = -55.0
 
 [node name="OffsetTimer" type="Timer" parent="."]
@@ -249,10 +318,10 @@ one_shot = true
 [node name="Music" type="AudioStreamPlayer" parent="."]
 
 [node name="GUI" type="CanvasLayer" parent="."]
-script = ExtResource( 7 )
+script = ExtResource( 13 )
 
 [node name="Game" type="Control" parent="GUI"]
-visible = false
+editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -262,7 +331,7 @@ margin_top = 16.0
 margin_right = 606.0
 margin_bottom = 69.0
 grow_horizontal = 2
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 10 )
 text = "Title"
 align = 1
 
@@ -271,7 +340,7 @@ margin_left = 205.0
 margin_top = 72.0
 margin_right = 520.0
 margin_bottom = 105.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 11 )
 text = "Origin"
 align = 1
 valign = 1
@@ -282,14 +351,14 @@ margin_top = 71.0
 margin_right = 90.0
 margin_bottom = 641.0
 rect_scale = Vector2( 0.6, 0.6 )
-texture = ExtResource( 9 )
-script = ExtResource( 10 )
+texture = ExtResource( 15 )
+script = ExtResource( 16 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Fill" type="TextureRect" parent="GUI/Game/MultiplierBar"]
-texture = ExtResource( 11 )
+texture = ExtResource( 17 )
 
 [node name="Cover" type="Control" parent="GUI/Game/MultiplierBar"]
 editor/display_folded = true
@@ -298,7 +367,7 @@ margin_bottom = 570.0
 rect_clip_content = true
 
 [node name="CoverFill" type="TextureRect" parent="GUI/Game/MultiplierBar/Cover"]
-texture = ExtResource( 9 )
+texture = ExtResource( 15 )
 
 [node name="Tween" type="Tween" parent="GUI/Game/MultiplierBar"]
 
@@ -310,8 +379,8 @@ margin_right = 756.0
 margin_bottom = 641.0
 grow_horizontal = 0
 rect_scale = Vector2( 0.6, 0.6 )
-texture = ExtResource( 9 )
-script = ExtResource( 10 )
+texture = ExtResource( 15 )
+script = ExtResource( 16 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -319,7 +388,7 @@ __meta__ = {
 [node name="Fill" type="TextureRect" parent="GUI/Game/ProgressBar"]
 margin_right = 90.0
 margin_bottom = 570.0
-texture = ExtResource( 12 )
+texture = ExtResource( 18 )
 
 [node name="Cover" type="Control" parent="GUI/Game/ProgressBar"]
 margin_right = 90.0
@@ -327,7 +396,7 @@ margin_bottom = 570.0
 rect_clip_content = true
 
 [node name="CoverFill" type="TextureRect" parent="GUI/Game/ProgressBar/Cover"]
-texture = ExtResource( 9 )
+texture = ExtResource( 15 )
 
 [node name="Tween" type="Tween" parent="GUI/Game/ProgressBar"]
 
@@ -336,7 +405,7 @@ margin_left = 16.0
 margin_top = 16.0
 margin_right = 128.0
 margin_bottom = 63.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 12 )
 text = "x1.0"
 
 [node name="Score" type="Label" parent="GUI/Game"]
@@ -344,7 +413,7 @@ margin_left = 472.0
 margin_top = 16.0
 margin_right = 704.0
 margin_bottom = 63.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 12 )
 text = "0"
 align = 2
 
@@ -353,7 +422,7 @@ margin_left = 608.0
 margin_top = 80.0
 margin_right = 664.0
 margin_bottom = 127.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 12 )
 text = "0"
 align = 2
 
@@ -367,6 +436,7 @@ rect_min_size = Vector2( 512, 115 )
 
 [node name="Pause" type="Control" parent="GUI"]
 pause_mode = 2
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -398,7 +468,7 @@ margin_bottom = 240.0
 grow_horizontal = 2
 rect_min_size = Vector2( 0, 240 )
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 13 )
 text = "Paused"
 align = 1
 
@@ -421,7 +491,7 @@ margin_left = -87.0
 margin_top = -24.5
 margin_right = 87.0
 margin_bottom = 24.5
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 14 )
 text = "Resume"
 align = 1
 valign = 1
@@ -445,7 +515,7 @@ margin_left = -101.5
 margin_top = -24.5
 margin_right = 101.5
 margin_bottom = 24.5
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 14 )
 text = "Restart"
 align = 1
 valign = 1
@@ -469,7 +539,7 @@ margin_left = -101.5
 margin_top = -24.5
 margin_right = 101.5
 margin_bottom = 24.5
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 14 )
 text = "Menu"
 align = 1
 valign = 1
@@ -508,7 +578,7 @@ margin_bottom = 240.0
 grow_horizontal = 2
 rect_min_size = Vector2( 0, 240 )
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 13 )
 text = "Well Done!"
 align = 1
 
@@ -531,7 +601,7 @@ margin_left = -101.5
 margin_top = -24.5
 margin_right = 101.5
 margin_bottom = 24.5
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 14 )
 text = "Restart"
 align = 1
 valign = 1
@@ -555,7 +625,7 @@ margin_left = -58.0
 margin_top = -24.5
 margin_right = 58.0
 margin_bottom = 24.5
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 14 )
 text = "Menu"
 align = 1
 valign = 1
@@ -574,7 +644,7 @@ margin_left = 58.0
 margin_top = 111.0
 margin_right = 309.0
 margin_bottom = 153.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 15 )
 text = "120 bpm"
 
 [node name="Label3" type="Label" parent="GUI/DEBUG"]
@@ -582,7 +652,7 @@ margin_left = 58.0
 margin_top = 153.0
 margin_right = 366.0
 margin_bottom = 195.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 15 )
 text = "1.24 s"
 
 [node name="Label4" type="Label" parent="GUI/DEBUG"]
@@ -590,11 +660,11 @@ margin_left = 58.0
 margin_top = 195.0
 margin_right = 366.0
 margin_bottom = 237.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 15 )
 text = "0"
 [connection signal="beat" from="." to="LaneContainer/Lane3" method="spawn"]
-[connection signal="beat" from="." to="LaneContainer/Lane4" method="spawn"]
 [connection signal="beat" from="." to="LaneContainer/Lane1" method="spawn"]
+[connection signal="beat" from="." to="LaneContainer/Lane4" method="spawn"]
 [connection signal="beat" from="." to="LaneContainer/Lane2" method="spawn"]
 [connection signal="move" from="." to="StageContainer/Dancer" method="move"]
 [connection signal="move" from="." to="StageContainer/Dancer2" method="move"]

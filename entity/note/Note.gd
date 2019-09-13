@@ -9,7 +9,8 @@ export(Texture) var texture_tap
 
 const START_POS = 0		# DO NOT CHANGE!
 const END_POS = 1		# DO NOT CHANGE!
-const GROW_SIZE = Vector2(1, 1)
+const GROW_SIZE = Vector2(1.75, 1.75)
+const FADE_SPEED = 0.1
 var TYPE
 
 var hittable = false
@@ -19,9 +20,12 @@ func _ready():
 	$Tween.interpolate_property(self, "unit_offset",
 		START_POS, END_POS, GameManager.NOTE_SPEED,
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
-	$Tween.interpolate_property($Sprite, "scale",
-		$Sprite.scale, GROW_SIZE, GameManager.NOTE_SPEED,
+	$Tween.interpolate_property(self, "scale",
+		self.scale, GROW_SIZE, GameManager.NOTE_SPEED,
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Fader.interpolate_property(self, "modulate",
+		self.modulate, Color(1, 1, 1, 0), FADE_SPEED,
+		Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	$Tween.start()
 	
 func set_type(type):
@@ -44,19 +48,22 @@ func hit(action):
 	else:
 		hittable = false
 		if TYPE == action:
-			$Sprite.modulate = Color(0,1,0)
+#			$Sprite.modulate = Color(0,1,0)
 			get_parent().pass_note(self, true)
 			return "HIT"
 		else:
-			$Sprite.modulate = Color(1,0,0)
+#			$Sprite.modulate = Color(1,0,0)
 			get_parent().pass_note(self, false)
 			return "WRONG"
+			
+func fade():
+	$Fader.start()
 
 func _physics_process(delta):
 	if unit_offset >= GameManager.HITTER_TOLERANCE[0] and unit_offset < GameManager.HITTER_TOLERANCE[1] and not attempted:
 		attempted = true
 		hittable = true
-		$Sprite.modulate = Color(1,1,0)
+#		$Sprite.modulate = Color(1,1,0)
 	if unit_offset >= GameManager.HITTER_TOLERANCE[1] and hittable:
 		hit(GameManager.Action.NONE)
 	if unit_offset >= 1:

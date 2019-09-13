@@ -75,7 +75,7 @@ func restart():
 	GameManager.start_level(GameManager.current_level_idx)
 
 func beat():
-	$Metronome/Beep.play()
+#	$Metronome/Beep.play()
 	$GUI/DEBUG/Label4.text = str(beat_counter)
 	gui.update("progress_bar", beat_counter / float(end_beat_count))
 	move_dancer()

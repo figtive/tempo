@@ -21,6 +21,8 @@ func pass_note(note, is_hit):
 		queue[lane_number].pop_front()
 	if is_hit:
 		GameManager.hit(true)
+		$Hitter/Button/Halo/AnimationPlayer.play("Hit")
+		note.fade()
 	else:
 		GameManager.hit(false)
 

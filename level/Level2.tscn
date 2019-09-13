@@ -17,6 +17,33 @@ DEBUG_TEMPO_V2 = true
 [node name="Sprite" parent="LaneContainer" index="0"]
 texture = ExtResource( 3 )
 
+[node name="Lane1" parent="LaneContainer" index="1"]
+editor/display_folded = true
+
+[node name="Hitter" parent="LaneContainer/Lane1" index="1"]
+position = Vector2( 145.973, 1113.09 )
+
+[node name="Lane2" parent="LaneContainer" index="2"]
+editor/display_folded = true
+
+[node name="Hitter" parent="LaneContainer/Lane2" index="1"]
+position = Vector2( 288.642, 1113.41 )
+
+[node name="Lane3" parent="LaneContainer" index="3"]
+editor/display_folded = true
+
+[node name="Hitter" parent="LaneContainer/Lane3" index="1"]
+position = Vector2( 431.358, 1113.41 )
+
+[node name="Lane4" parent="LaneContainer" index="4"]
+editor/display_folded = true
+
+[node name="Hitter" parent="LaneContainer/Lane4" index="1"]
+position = Vector2( 574.027, 1113.09 )
+
+[node name="StageContainer" parent="." index="2"]
+editor/display_folded = true
+
 [node name="Background" parent="StageContainer" index="0"]
 texture = ExtResource( 4 )
 
@@ -30,5 +57,12 @@ FRAME_COUNT = 33
 [node name="Dancer2" parent="StageContainer" index="3"]
 DANCER_SPRITE = ExtResource( 7 )
 FRAME_COUNT = 33
-[connection signal="move" from="." to="StageContainer/Dancer" method="move"]
-[connection signal="move" from="." to="StageContainer/Dancer2" method="move"]
+
+[node name="GUI" parent="." index="6"]
+editor/display_folded = true
+
+[node name="Game" parent="GUI" index="0"]
+visible = true
+
+[node name="Pause" parent="GUI" index="1"]
+visible = false
