@@ -31,6 +31,7 @@ run/main_scene="res://level/MainMenu.tscn"
 boot_splash/image="res://logo/white_acc_trans.png"
 boot_splash/fullsize=false
 config/icon="res://icon.png"
+config/quit_on_go_back=false
 
 [autoload]
 

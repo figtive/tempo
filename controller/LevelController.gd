@@ -29,6 +29,8 @@ var frame_counter = 0
 
 onready var gui: GUIController = $GUI
 
+var paused = false
+
 func _ready():
 	get_tree().set_pause(false)
 	GameManager.current_level = self
@@ -63,10 +65,12 @@ func _ready():
 	start_beat()
 
 func pause(pause=true):
-	if pause:
+	if pause and not paused:
+		paused = true
 		get_tree().set_pause(true)
 		gui.change_display("pause")
-	else:
+	if not pause and paused:
+		paused = false
 		gui.change_display("game")
 		get_tree().set_pause(false)
 
@@ -135,6 +139,15 @@ func start_music():
 	print("[LevelController] Starting music ...")
 	$Music.play()
 	$Metronome.start()
+	
+	
+func _notification(event):
+    if event == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+        pause(true)
+        pass        
+    if event == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST: 
+        pause(true)
+        pass
 
 func parse(data: String):
 	var lines = data.split("\n", false)
@@ -142,6 +155,7 @@ func parse(data: String):
 	origin = lines[1]
 	bpm = lines[2] as float
 	signature = lines[3].split(" ")[0] as int
+	notes = {}
 	for i in range(4, lines.size()):
 		note_count += 1
 		var tokens = lines[i].split(" ", false)

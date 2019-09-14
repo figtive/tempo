@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://level/MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://font/LCD_Solid.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://font/VT323-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 120
+size = 148
 outline_size = 5
 outline_color = Color( 0.223529, 0.223529, 0.223529, 1 )
 font_data = ExtResource( 2 )
@@ -32,9 +32,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Title" type="Label" parent="GUI/Main/VBoxContainer"]
-margin_top = 258.0
+margin_top = 244.0
 margin_right = 720.0
-margin_bottom = 379.0
+margin_bottom = 393.0
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 1 )
 text = "Tempo"
@@ -113,9 +113,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Title" type="Label" parent="GUI/Levels/VBoxContainer"]
-margin_top = 127.0
+margin_top = 113.0
 margin_right = 720.0
-margin_bottom = 248.0
+margin_bottom = 262.0
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 1 )
 text = "Levels"
@@ -155,9 +155,9 @@ size_flags_horizontal = 4
 color = Color( 0.164706, 0.227451, 0.294118, 1 )
 
 [node name="Label" type="Label" parent="GUI/Levels/VBoxContainer/VBoxContainer/ScrollContainer/HBoxContainer/MarginContainer"]
-margin_left = 244.0
+margin_left = 284.0
 margin_top = 231.0
-margin_right = 476.0
+margin_right = 436.0
 margin_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -184,9 +184,9 @@ size_flags_horizontal = 4
 color = Color( 0, 0.505882, 1, 1 )
 
 [node name="Label" type="Label" parent="GUI/Levels/VBoxContainer/VBoxContainer/ScrollContainer/HBoxContainer/MarginContainer2"]
-margin_left = 200.0
+margin_left = 255.0
 margin_top = 231.0
-margin_right = 519.0
+margin_right = 464.0
 margin_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -213,9 +213,9 @@ size_flags_horizontal = 4
 color = Color( 0, 0.505882, 1, 1 )
 
 [node name="Label" type="Label" parent="GUI/Levels/VBoxContainer/VBoxContainer/ScrollContainer/HBoxContainer/MarginContainer3"]
-margin_left = 142.0
+margin_left = 217.0
 margin_top = 231.0
-margin_right = 577.0
+margin_right = 502.0
 margin_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
