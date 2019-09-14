@@ -1,10 +1,10 @@
-from mido import MidiFile, tempo2bpm
+import mido as m
 
 
 def main():
     filename = input('Filename: ')
     filename = f'{filename}.mid' if filename[-4:] != '.mid' else filename
-    midi_file = MidiFile(filename)
+    midi_file = m.MidiFile(filename)
 
     auto_title = ''
     auto_origin = ''
@@ -41,7 +41,7 @@ def main():
     clocks_per_click = get_clocks_per_click(midi_file)
     last_timestamp = get_last_timestamp(midi_file, offset, clocks_per_click)
     notes = get_notes(midi_file, offset, clocks_per_click)
-    bpm = tempo2bpm(get_tempo(midi_file))
+    bpm = m.tempo2bpm(get_tempo(midi_file))
     denominator = get_denominator(midi_file)
 
     output = open(f'{title}.tempo', 'w')
