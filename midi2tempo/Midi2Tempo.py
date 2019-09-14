@@ -1,15 +1,22 @@
-from mido import MidiFile, tempo2bpm
+import mido as m
 
 
 def main():
     filename = input('Filename: ')
     filename = f'{filename}.mid' if filename[-4:] != '.mid' else filename
-    midi_file = MidiFile(filename)
+    midi_file = m.MidiFile(filename)
 
-    title = input('Title: ')
-    origin = input('Origin: ')
+    auto_title = ''
+    auto_origin = ''
+    if '-' in filename:
+        filename = filename[:-4].split('-')
+        if len(filename) == 2:
+            auto_title = filename[0].strip()
+            auto_origin = filename[1].strip()
+
+    title = input(f'Title (default \'{auto_title}\'): ')
+    origin = input(f'Origin (default \'{auto_origin}\'): ')
     offset = input('Offset (default 0): ')
-    offset = 0 if offset == '' else int(offset)
     write_timestamp = True if input('Include timestamp?(y/n) ').lower() == 'y' else False
     write_empty = True if input('Skip empty?(y/n) ').lower() == 'y' else False
     intro_beat = int(input('Start intro at beat: '))
@@ -19,6 +26,10 @@ def main():
     intro_frames = int(input('Intro frames count: '))
     body_frames = int(input('Body frames count: '))
     outro_frames = int(input('Outro frames count: '))
+
+    offset = 0 if offset == '' else int(offset)
+    title = auto_title if title == '' else title
+    origin = auto_origin if origin == '' else origin
 
     numerator = get_numerator(midi_file)
     offset = offset * numerator
@@ -30,7 +41,7 @@ def main():
     clocks_per_click = get_clocks_per_click(midi_file)
     last_timestamp = get_last_timestamp(midi_file, offset, clocks_per_click)
     notes = get_notes(midi_file, offset, clocks_per_click)
-    bpm = tempo2bpm(get_tempo(midi_file))
+    bpm = m.tempo2bpm(get_tempo(midi_file))
     denominator = get_denominator(midi_file)
 
     output = open(f'{title}.tempo', 'w')
