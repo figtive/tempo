@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://entity/note/Note.gd" type="Script" id=1]
 [ext_resource path="res://entity/note/sprites/note_0.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://entity/note/sprites/note_2.png" type="Texture" id=4]
 [ext_resource path="res://entity/note/sprites/note_3.png" type="Texture" id=5]
 [ext_resource path="res://entity/note/sprites/note_4.png" type="Texture" id=6]
+[ext_resource path="res://entity/note/sprites/note_5.png" type="Texture" id=7]
 
 [node name="Note" type="PathFollow2D"]
 rotate = false
@@ -20,10 +21,16 @@ texture_tap = ExtResource( 6 )
 [node name="Tween" type="Tween" parent="."]
 playback_process_mode = 0
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="SpriteBase" type="Sprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 6 )
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 0
 one_shot = true
+
+[node name="Fader" type="Tween" parent="."]

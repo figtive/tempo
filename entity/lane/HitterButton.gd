@@ -10,14 +10,16 @@ func _ready():
 func _input(event):
 	if event is InputEventScreenTouch:
 		if event.pressed:
-			if global_position.distance_to(event.position) < TOUCH_RADIUS * 2:
+			if (global_position - position).distance_to(event.position) < TOUCH_RADIUS * 1.2:
 				touched_index = event.index
 				trigger_level = 1
 				get_parent().get_parent().hit(GameManager.Action.TAP)
+				$AnimationPlayer.play("Pressed")
 		else:
 			if touched_index != null:
 				touched_index = null
 				trigger_level = 0
+				$AnimationPlayer.play_backwards("Pressed")
 	if event is InputEventScreenDrag and event.index == touched_index and trigger_level == 1:
 		trigger_level = 2
 		var angle = event.relative.angle_to(Vector2(1,1))

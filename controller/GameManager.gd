@@ -2,7 +2,7 @@ extends Node
 
 enum Action {TAP = 5, SWIPE_UP = 1, SWIPE_DOWN = 2, SWIPE_LEFT = 3, SWIPE_RIGHT = 4, NONE = 0}
 enum Pass {MATCH = 1, MISSED = 0}
-enum Section {INTRO, BODY, OUTRO, STOP = 0}
+enum Section {INTRO, BODY, OUTRO, STOP}
 
 const HITTER_POS = 0.74					# unit position of hitter on the lane
 const HITTER_TOLERANCE = [0.64, 0.8]	# tolerance window for hitters
@@ -19,17 +19,27 @@ var MULT_PERCENT = 0.0
 var SCORE = 0
 var STREAK = 0
 
-var current_level: LevelController
+var current_level
+var current_level_idx = -1
 
+const MAINMENU_SCENE = preload("res://level/MainMenu.tscn")
 const LEVELS = [
 	null,									# INSERT TUTORIAL LEVEL HERE
-	preload("res://level/Level1.tscn")
+	preload("res://level/Level1.tscn"),
+	preload("res://level/Level2.tscn")
 ]
+
+func return_menu():
+	reset_level()
+	current_level_idx = -1
+	print("[GameManager] Returning to main menu ...")
+	get_tree().change_scene_to(MAINMENU_SCENE)
 
 func start_level(level):
 	if LEVELS.size() <= level or LEVELS[level] == null:
 		print("[GameManager] Level%s not found!" % level)
 		return
+	current_level_idx = level
 	print("[GameManager] Loading Level%s ..." % level)
 	get_tree().change_scene_to(LEVELS[level])
 	reset_level()

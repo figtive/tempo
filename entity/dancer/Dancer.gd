@@ -12,4 +12,4 @@ func _ready():
 
 func move(step=counter):
 	counter = (step + 1) % FRAME_COUNT
-	self.frame = step
+	self.frame = step % FRAME_COUNT

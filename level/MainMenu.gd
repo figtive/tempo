@@ -8,7 +8,10 @@ var selected_level = 0
 func _ready():
 	$GUI/Levels/VBoxContainer/VBoxContainer/ScrollContainer.scroll_horizontal = selected_level * SCREEN_WIDTH
 	change_menu("main")
-	
+
+func _process(delta):
+	if Input.is_key_pressed(KEY_BACKSLASH):
+		change_menu("main")
 
 func change_menu(menu):
 	match menu:
@@ -30,8 +33,6 @@ func change_menu(menu):
 func play():
 	print("PLAY")
 	GameManager.start_level(selected_level)
-	
-
 
 func scroll(is_scrolling):
 	if !is_scrolling:
@@ -41,7 +42,7 @@ func scroll(is_scrolling):
 				selected_level = level
 				snap_level(level, position)
 				break
-				
+
 func snap_level(level, position=$GUI/Levels/VBoxContainer/VBoxContainer/ScrollContainer.scroll_horizontal):
 	$Tween.stop($GUI/Levels/VBoxContainer/VBoxContainer/ScrollContainer, "scroll_horizontal")
 	$Tween.interpolate_property($GUI/Levels/VBoxContainer/VBoxContainer/ScrollContainer,
